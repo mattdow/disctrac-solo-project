@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Card, CardHeader, CardContent, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, Typography, Button } from '@mui/material';
 
 // creating a round component for each individual round item for ease of selecting and styling
 // pass in the round from the RoundsView array map
@@ -32,26 +32,25 @@ function RoundItem({ round }) {
     return (
         <Card variant="outlined" sx={{my:2}}
               onClick={() => addRound(round)}>
-            <CardContent>
+            <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Typography 
-                    variant = "body2" sx={{mx:1}}
-                    display = "inline"
-                    align = "left">
+                    variant = "body2">
                     {round.course_name}
                 </Typography>
                 <Typography 
-                    variant = "body2" sx={{mx:1}}
-                    display = "inline"
-                    align = "center">
+                    variant = "body2">
                     {convertDate(round.date_played)}
                 </Typography>
                 <Typography 
-                    variant = "body2" sx={{mx:1}}
-                    display = "inline"
-                    align = "right">
+                    variant = "body2">
                     {convertScore(round.total_score)}
                 </Typography>
             </CardContent>
+            <CardActions>
+                <Button size="large" 
+                        variant="outlined"
+                        onClick={() => addRound(round.course_id)}>PLAY AGAIN</Button>
+            </CardActions>
         </Card>
     )
 }

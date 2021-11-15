@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
-import RoundItem from '../RoundItem/Rounditem';
+import RoundItem from '../RoundItem/RoundItem';
 
 
 function RoundsView() {
