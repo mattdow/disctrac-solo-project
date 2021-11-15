@@ -25,8 +25,12 @@ function RoundItem({ round }) {
         }
     }
     // define a function for actions to run when a round is clicked
-    const addRound = (round) => {
-
+    const addRound = (courseID) => {
+        console.log('In addRound for', courseID);
+        // I need to fetch the hole information from the DB for the course the user selects
+        dispatch({ type: 'FETCH_CURRENT_COURSE', payload: courseID });
+        // go to the activeround view
+        history.push(`activeround/${courseID}`);
     } // end of addRound
 
     return (
@@ -49,7 +53,7 @@ function RoundItem({ round }) {
             <CardActions>
                 <Button size="large" 
                         variant="outlined"
-                        onClick={() => addRound(round.course_id)}>PLAY AGAIN</Button>
+                        onClick={() => addRound(round.courseid)}>PLAY AGAIN</Button>
             </CardActions>
         </Card>
     )
