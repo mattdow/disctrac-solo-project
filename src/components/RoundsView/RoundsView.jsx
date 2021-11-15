@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
+import RoundItem from '../RoundItem/Rounditem';
 
 
 function RoundsView() {
@@ -26,10 +27,11 @@ function RoundsView() {
         <Grid container className="rounds-list">
             {rounds.map(round => {
                 return (
-                    <li id={round.id}>{round.course_name}{round.total_score}</li>
+                    <Grid item xs={12} lg={12}>
+                        <RoundItem key={round.id} round={round} />
+                    </Grid>
                 )
             })}
-
         </Grid>
         </>
         
