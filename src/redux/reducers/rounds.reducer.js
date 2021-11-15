@@ -8,3 +8,5 @@ const roundsReducer = (state = [], action) => {
             return state;
     }
 }
+
+export default roundsReducer;

@@ -23,7 +23,12 @@ function RoundsView() {
         <Typography
             sx = {{m:2}}
             variant = 'h2'>Your Rounds</Typography>
-        <Grid>
+        <Grid container className="rounds-list">
+            {rounds.map(round => {
+                return (
+                    <li id={round.id}>{round.course_name}{round.total_score}</li>
+                )
+            })}
 
         </Grid>
         </>
