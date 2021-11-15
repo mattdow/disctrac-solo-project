@@ -30,12 +30,11 @@ function RoundItem({ round }) {
         // I need to fetch the hole information from the DB for the course the user selects
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: courseID });
         // go to the activeround view
-        history.push(`activeround/${courseID}`);
+        // history.push(`activeround/${courseID}`);
     } // end of addRound
 
     return (
-        <Card variant="outlined" sx={{my:2}}
-              onClick={() => addRound(round)}>
+        <Card variant="outlined" sx={{my:2}}>
             <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Typography 
                     variant = "body2">

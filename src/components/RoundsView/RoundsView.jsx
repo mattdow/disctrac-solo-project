@@ -27,8 +27,8 @@ function RoundsView() {
         <Grid container className="rounds-list">
             {rounds.map(round => {
                 return (
-                    <Grid item xs={12} lg={12}>
-                        <RoundItem key={round.id} round={round} />
+                    <Grid key={round.id} item xs={12} lg={12}>
+                        <RoundItem  round={round} />
                     </Grid>
                 )
             })}
