@@ -5,7 +5,7 @@ function* fetchRounds() {
     // GET all the user rounds
     try {
         const response = yield axios.get('/api/rounds');
-        yield console.log('User GET request response is:', response);
+        yield console.log('User rounds GET request response is:', response);
         yield put({ type: 'SET_ROUNDS', payload: response.data });
     } catch (err) {
         yield put({ type: 'FETCH_ROUNDS_ERROR' });
