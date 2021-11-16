@@ -11,11 +11,15 @@ function HoleScoreView() {
     const history = useHistory();
     // set the course id and hole number equal to what is currently in params
     let { course, id } = useParams();
-    console.log('React Router course ID is: ', course);
-    console.log('React Router hole ID is: ', id);
+    // console.log('React Router course ID is: ', course);
+    // console.log('React Router hole ID is: ', id);
      
     // grab the active courses array of holes from the Redux store
     const currentCourse = useSelector((store) => store.currentCourse);
+
+    // grab the active round data from the activeRound reducer
+    const activeRound = useSelector((store) => store.activeRound);
+     
 
     // Using the ID from params, I'll search through the current course array to pick out the correct hole to display
     let activeHole = {};
@@ -31,11 +35,8 @@ function HoleScoreView() {
     findActiveHole();
 
     // set a local state for the new hole information
-    let [newScore, setNewScore] = useState(activeHole.par_score);
+    let [newScore, setNewScore] = useState(3);
     let [newNote, setNewNote] = useState('');
-    console.log('Active hole is: ', activeHole);
-    console.log('Active par score is: ', activeHole.par_score);
-    console.log('newScore is: ', newScore);
     // define decreaseScore to decrement
     const decreaseScore = (event) => {
         return setNewScore(newScore - 1);
@@ -44,11 +45,27 @@ function HoleScoreView() {
     const increaseScore = (event) => {
         return setNewScore(newScore + 1);
     } 
+    // define submitScore to post new holeScore to DB and refresh the holeScore view
+    function submitScore() {
+        event.preventDefault();
+        // define the new holeScore using the state variables
+        let newHoleScore = {
+            round_id: activeRound.round_id,
+            hole_id: currentCourse[id-1].hole_id,
+            score: newScore,
+            note_content: newNote
+        }
+        console.log(newHoleScore);
+        dispatch({
+            type: 'ADD_HOLE_SCORE',
+            payload: newHoleScore
+        });
+        history.push(`activeround/${course}/${id+1}`)
+    }
     // call useEffect to grab the current course from state immediately upon render
     useEffect(() => {
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: course});
-        console.log(currentCourse[id-1].par_score);
-        setNewScore(currentCourse[id-1].par_score);
+        // setNewScore(currentCourse[id-1].par_score);
     }, [dispatch]);
    
     return (
@@ -69,8 +86,14 @@ function HoleScoreView() {
                 </Typography>
                 <Button onClick={increaseScore}>+</Button>
             </Box>
-            <TextField variant="outlined" label="Hole Notes"/>
-
+            <TextField 
+                variant="outlined" 
+                label="Hole Notes"
+                fullWidth
+                value={newNote}
+                onChange={(e) => setNewNote(e.target.value)}
+                        />
+            <Button onClick={submitScore}>NEXT</Button>
         </section>
     )
 

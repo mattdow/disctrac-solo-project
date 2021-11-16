@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
     const startRoundQuery = `
     INSERT INTO rounds ("user_id", "course_id", "date_played")
     VALUES ($1, $2, CURRENT_DATE)
-    RETURNING "id";`
+    RETURNING "id";`;
     const values = [req.body.user, req.body.course];
     //query the database to create the movie
     pool.query(startRoundQuery, values)
