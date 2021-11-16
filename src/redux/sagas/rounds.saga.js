@@ -18,8 +18,6 @@ function* postNewRound(action) {
         const response = yield axios.post('/api/rounds', action.payload);
         yield console.log('New Round POST response is: ', response.data);
         yield put({type: 'SET_ROUND_ID', payload: response.data.round_id});
-        
-        
         // may need to fetch the new rounds list
         yield put ({type: 'FETCH_ROUNDS'});
     } catch(err) {

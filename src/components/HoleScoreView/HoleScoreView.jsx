@@ -36,11 +36,19 @@ function HoleScoreView() {
     console.log('Active hole is: ', activeHole);
     console.log('Active par score is: ', activeHole.par_score);
     console.log('newScore is: ', newScore);
-    // console.log(newScore);
-    // define decreaseScore to decrement 
+    // define decreaseScore to decrement
+    const decreaseScore = (event) => {
+        return setNewScore(newScore - 1);
+    } 
+    // define decreaseScore to decrement
+    const increaseScore = (event) => {
+        return setNewScore(newScore + 1);
+    } 
     // call useEffect to grab the current course from state immediately upon render
     useEffect(() => {
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: course});
+        console.log(currentCourse[id-1].par_score);
+        setNewScore(currentCourse[id-1].par_score);
     }, [dispatch]);
    
     return (
@@ -55,11 +63,11 @@ function HoleScoreView() {
                 Notes
             </Typography>
             <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
-                <Button onClick={(e) => {setNewScore(newScore--)}}>-</Button>
-                <Input variant="h3"
-                        type="number"
-                        value={newScore}/>
-                {/* <Button onClick={(e) => {setNewScore(newScore++)}}>+</Button> */}
+                <Button onClick={decreaseScore}>-</Button>
+                <Typography variant="h3">
+                    {newScore}
+                </Typography>
+                <Button onClick={increaseScore}>+</Button>
             </Box>
             <TextField variant="outlined" label="Hole Notes"/>
 
