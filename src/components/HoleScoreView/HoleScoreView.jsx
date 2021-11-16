@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Card, TextField, Typography, Box } from '@mui/material';
 
@@ -9,13 +9,11 @@ function HoleScoreView() {
     const dispatch = useDispatch();
     // set UseHistory hook to a variable
     const history = useHistory();
-    // set the hole number equal to what is currently in params
+    // set the course id and hole number equal to what is currently in params
     let { course, id } = useParams();
     console.log('React Router course ID is: ', course);
     console.log('React Router hole ID is: ', id);
-    // grab the current course list from the Redux store
-    const courses = useSelector((store) => store.courses);
-    
+     
     // grab the active courses array of holes from the Redux store
     const currentCourse = useSelector((store) => store.currentCourse);
 
@@ -31,6 +29,13 @@ function HoleScoreView() {
         } // end of for loop
     } // end of findActiveHole fxn
     findActiveHole();
+
+    // set a local state for the new hole information
+    let [newScore, setNewScore] = useState(activeHole.par_score)
+    let [newNote, setNewNote] = useState('');
+    console.log(activeHole.par_score);
+    // console.log(newScore);
+    // define decreaseScore to decrement 
     // call useEffect to grab the current course from state immediately upon render
     useEffect(() => {
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: course});
@@ -48,9 +53,9 @@ function HoleScoreView() {
                 Notes
             </Typography>
             <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
-                <Button>-</Button>
-                <Typography variant="h3">{activeHole.par_score}</Typography>
-                <Button>+</Button>
+                <Button onClick={(e) => {setNewScore(newScore--)}}>-</Button>
+                <Typography variant="h3">{newScore}</Typography>
+                <Button onClick={(e) => {setNewScore(newScore++)}}>+</Button>
             </Box>
             <TextField variant="outlined" label="Hole Notes"/>
 

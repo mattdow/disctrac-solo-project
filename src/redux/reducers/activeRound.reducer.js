@@ -9,6 +9,7 @@ const emptyNewRound = {
 const activeRoundReducer = (state = emptyNewRound, action) => {
     switch (action.type) {
         case 'START_NEW_ROUND':
+            // spreading the state object and changing the non-array values
             return { ...state, user_id: action.payload.user, course_id: action.payload.course}
         case 'LOGOUT':
             return {};
