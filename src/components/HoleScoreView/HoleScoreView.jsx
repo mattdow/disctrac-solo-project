@@ -48,7 +48,7 @@ function HoleScoreView() {
                 Notes
             </Typography>
             <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
-                <Button sx={{fontSize:'32'}}>-</Button>
+                <Button>-</Button>
                 <Typography variant="h3">{activeHole.par_score}</Typography>
                 <Button>+</Button>
             </Box>

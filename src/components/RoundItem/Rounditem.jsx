@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Card, CardActions, CardContent, Typography, Button } from '@mui/material';
 
@@ -9,6 +9,8 @@ function RoundItem({ round }) {
     const dispatch = useDispatch();
     // create a variable for the router hook
     const history = useHistory();
+    // grab the current user from the Redux store
+    const user = useSelector((store) => store.user)
     // define a function to convert the SQL date string to common date format
     const convertDate = (dateString) => {
         let date_new = new Date(dateString);
@@ -27,9 +29,10 @@ function RoundItem({ round }) {
     // define a function for actions to run when a round is clicked
     const addRound = (courseID) => {
         console.log('In addRound for', courseID);
-        // I need to fetch the hole information from the DB for the course the user selects
-        // dispatch({ type: 'FETCH_CURRENT_COURSE', payload: courseID });
-        // go to the activeround view
+        // call the active round reducer to add the course and user info to the active round object
+        dispatch({type: 'START_NEW_ROUND', payload: {
+            user: user.id, course: courseID
+        }})
         history.push(`/activeround/${courseID}/1`);
     } // end of addRound
 
