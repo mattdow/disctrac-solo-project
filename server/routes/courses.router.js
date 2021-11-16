@@ -3,6 +3,19 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// Get all courses in the database
+
+router.get('/', (req, res) => {
+    console.log('Course list GET request');
+    let query = 'SELECT *  FROM courses';
+    pool.query(query).then( result => {
+        res.send(result.rows);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);        
+    })
+});
+
 // Get the course hole data for the course selected by user click
 
 router.get('/:id', (req, res) => {
@@ -10,7 +23,7 @@ router.get('/:id', (req, res) => {
     // assign the search parameter to the id parameter from fetchCurrentCourse
     const values = [req.params.id];
     //query the database to return a list of the hole info for the selected course
-    const courseQuery = `SELECT holes.hole_number, holes.par_score, holes.hole_length FROM holes
+    const courseQuery = `SELECT holes.id, holes.hole_number, holes.par_score, holes.hole_length FROM holes
     JOIN courses ON courses.id = holes.course_id
     WHERE courses.id = $1;`;
     pool.query(courseQuery, values)

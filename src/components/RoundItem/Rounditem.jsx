@@ -30,7 +30,7 @@ function RoundItem({ round }) {
         // I need to fetch the hole information from the DB for the course the user selects
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: courseID });
         // go to the activeround view
-        // history.push(`activeround/${courseID}`);
+        history.push(`/activeround/${courseID}/1`);
     } // end of addRound
 
     return (
