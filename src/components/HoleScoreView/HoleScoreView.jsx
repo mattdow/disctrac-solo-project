@@ -54,7 +54,7 @@ function HoleScoreView() {
         // define the new holeScore using the state variables
         let newHoleScore = {
             round_id: activeRound.round_id,
-            hole_id: currentCourse[activeHole.hole_number].hole_id,
+            hole_id: activeHole.id,
             score: newScore,
             note_content: newNote
         }
@@ -96,7 +96,7 @@ function HoleScoreView() {
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
                         />
-            <Button onClick={submitScore}>NEXT</Button>
+            {(activeHole.hole_number < currentCourse.length) && <Button onClick={submitScore}>NEXT</Button>}
         </section>
     )
 

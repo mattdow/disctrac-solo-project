@@ -2,6 +2,8 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 function* postNewHoleScore(action) {
+    console.log('In postNewHoleScore: ', action.payload);
+    
     try {
         yield axios.post('/api/holescores', action.payload);
     } catch(err) {
