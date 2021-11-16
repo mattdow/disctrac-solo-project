@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const roundsRouter = require('./routes/rounds.router');
 const coursesRouter = require('./routes/courses.router');
+const holeScoresRouter = require('./routes/holescores.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/rounds', roundsRouter);
 app.use('/api/courses', coursesRouter);
+app.use('/api/holescores', holeScoresRouter);
 
 // Serve static files
 app.use(express.static('build'));

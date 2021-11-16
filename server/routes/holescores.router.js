@@ -11,7 +11,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         INSERT INTO hole_scores (round_id, hole_id, score, note_content)
         VALUES ($1, $2, $3, $4);`;
     const values = [req.body.round_id, req.body.hole_id, req.body.score, req.body.note_content];
-    pool.query(startRoundQuery, values)
+    pool.query(newHoleScoreQuery, values)
     .then((result) => {
         console.log('POST newholescore SUCCESS');
         res.sendStatus(201);
@@ -20,3 +20,5 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 })
+
+module.exports = router;
