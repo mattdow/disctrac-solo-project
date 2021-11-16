@@ -58,7 +58,6 @@ function HoleScoreView() {
                 <Button onClick={(e) => {setNewScore(newScore--)}}>-</Button>
                 <Input variant="h3"
                         type="number"
-                        defaultValue={activeHole.par_score}
                         value={newScore}/>
                 {/* <Button onClick={(e) => {setNewScore(newScore++)}}>+</Button> */}
             </Box>

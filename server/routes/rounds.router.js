@@ -38,18 +38,15 @@ router.post('/', (req, res) => {
     const values = [req.body.user, req.body.course];
     //query the database to create the movie
     pool.query(startRoundQuery, values)
-    .then(response => {
+    .then(result => {
         // make sure we get an ID as a result
-        console.log('New Round ID: ', response.rows[0].id);
-        const newRoundID = response.rows[0].id;
-        res.send(response.rows);
+        console.log('New Round ID: ', result.rows[0].id);
+        const newRoundID = result.rows[0].id;
+        res.send({round_id: newRoundID});
     }).catch(err => {
         console.log('Error starting new round', err);
-        res.sendStatus(500);
-        
+        res.sendStatus(500);  
     })
-
-
 })
 
 module.exports = router;
