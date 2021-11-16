@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Card, TextField, Typography, Box } from '@mui/material';
+import { Button, Card, TextField, Typography, Box, Input } from '@mui/material';
 
 
 function HoleScoreView() {
@@ -31,9 +31,11 @@ function HoleScoreView() {
     findActiveHole();
 
     // set a local state for the new hole information
-    let [newScore, setNewScore] = useState(activeHole.par_score)
+    let [newScore, setNewScore] = useState(activeHole.par_score);
     let [newNote, setNewNote] = useState('');
-    console.log(activeHole.par_score);
+    console.log('Active hole is: ', activeHole);
+    console.log('Active par score is: ', activeHole.par_score);
+    console.log('newScore is: ', newScore);
     // console.log(newScore);
     // define decreaseScore to decrement 
     // call useEffect to grab the current course from state immediately upon render
@@ -54,8 +56,11 @@ function HoleScoreView() {
             </Typography>
             <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
                 <Button onClick={(e) => {setNewScore(newScore--)}}>-</Button>
-                <Typography variant="h3">{newScore}</Typography>
-                <Button onClick={(e) => {setNewScore(newScore++)}}>+</Button>
+                <Input variant="h3"
+                        type="number"
+                        defaultValue={activeHole.par_score}
+                        value={newScore}/>
+                {/* <Button onClick={(e) => {setNewScore(newScore++)}}>+</Button> */}
             </Box>
             <TextField variant="outlined" label="Hole Notes"/>
 

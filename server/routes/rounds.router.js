@@ -27,5 +27,29 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         });
 })
+// creating a post route to create a new round
+router.post('/', (req, res) => {
+    console.log(req.body);
+    // RETURNING "id" gives us back the id of the created movie
+    const startRoundQuery = `
+    INSERT INTO rounds ("user_id", "course_id", "date_played")
+    VALUES ($1, $2, CURRENT_DATE)
+    RETURNING "id";`
+    const values = [req.body.user, req.body.course];
+    //query the database to create the movie
+    pool.query(startRoundQuery, values)
+    .then(response => {
+        // make sure we get an ID as a result
+        console.log('New Round ID: ', response.rows[0].id);
+        const newRoundID = response.rows[0].id;
+        res.send(response.rows);
+    }).catch(err => {
+        console.log('Error starting new round', err);
+        res.sendStatus(500);
+        
+    })
+
+
+})
 
 module.exports = router;

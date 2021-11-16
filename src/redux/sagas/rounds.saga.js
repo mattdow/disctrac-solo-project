@@ -13,9 +13,22 @@ function* fetchRounds() {
     }
 }
 
+function* postNewRound(action) {
+    try {
+        yield axios.post('/api/rounds', action.payload);
+        // may need to fetch the new rounds list
+        yield put ({type: 'FETCH_ROUNDS'});
+    } catch(err) {
+        yield put({ type: 'START_NEW_ROUND_ERROR'});
+        console.log('Error in postNewRound', err);
+    }
+
+} // end of postNewRound
+
 function* roundsSaga() {
     // watching for actions related to the user's rounds
     yield takeLatest('FETCH_ROUNDS', fetchRounds);
+    yield takeLatest('START_NEW_ROUND', postNewRound);
 }
 
 export default roundsSaga;
