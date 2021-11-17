@@ -61,18 +61,22 @@ function HoleScoreView() {
             note_content: newNote
         }
         console.log(newHoleScore);
+        // if this is a new hole score, simply add to DB
         if (!holeScore) {
             dispatch({
                 type: 'ADD_HOLE_SCORE',
                 payload: newHoleScore
             });
+            // route to next hole (no holescore in route)
             history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}`)
+        // however, if we are editing, PUT to DB instead
         } else {
             dispatch({
                 type: 'CHANGE_HOLE_SCORE',
                 payload: newHoleScore
             });
-            history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}/${holeScore + 1}`)
+            // route to next hole ()
+            history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}/${Number(holeScore) + 1}`)
 
         }
         
@@ -81,17 +85,30 @@ function HoleScoreView() {
     function reviewRound(event) {
         event.preventDefault();
         let newHoleScore = {
+            holeScore_id: holeScore,
             round_id: round,
             hole_id: activeHole.id,
             score: newScore,
             note_content: newNote
         }
         console.log(newHoleScore);
-        dispatch({
-            type: 'ADD_HOLE_SCORE',
-            payload: newHoleScore
-        });
-        history.push(`/review/${round}`)
+        if (!holeScore) {
+            dispatch({
+                type: 'ADD_HOLE_SCORE',
+                payload: newHoleScore
+            });
+            // route to review round 
+            history.push(`/review/${round}/${course}`)
+        // however, if we are editing, PUT to DB instead
+        } else {
+            dispatch({
+                type: 'CHANGE_HOLE_SCORE',
+                payload: newHoleScore
+            });
+            // route to review round
+            history.push(`/review/${round}/${course}`)
+        }
+       
     }
     // call useEffect to grab the current course from state immediately upon render
     useEffect(() => {

@@ -3,17 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { Card, CardActions, CardContent, Typography, Button } from '@mui/material';
 
 // Creating a hole score component for each hole score in a particular round. Passing in the round from the ReviewRound array map
-function HoleScoreItem({ score }) {
+function HoleScoreItem({ score, course, round }) {
     // create a variable for the dispatch hook
     const dispatch = useDispatch();
     // create a variable for the router hook
     const history = useHistory();
-    // grab the active round information from the Redux store
-    const activeRound = useSelector((store) => store.activeRound);
-    // get the course and round from activeRound
-    console.log(activeRound);
-    const course = activeRound.course_id;
-    const round = activeRound.round_id;
+
+    // console.log('Course ID from props', course);
+    // console.log('Score object from props', round);
+    
+    
     // Define a function to route to the appropriate HoleScoreView
     function editScore() {
         history.push(`/activeround/${course}/${score.hole_number}/${round}/${score.id}`)

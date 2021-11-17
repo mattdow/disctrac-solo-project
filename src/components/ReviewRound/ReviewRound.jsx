@@ -6,8 +6,8 @@ import HoleScoreItem from '../HoleScoreItem/HoleScoreItem';
 
 function ReviewRound() {
     // set the round ID equal to what is currently in params
-    let { round } = useParams();
-    console.log(round);
+    let { round, course } = useParams();
+    console.log(round, course);
     // define dispatch fxn as a variable
     const dispatch = useDispatch();
     // Grab the hole score info from the Redux store
@@ -52,7 +52,10 @@ function ReviewRound() {
             {holeScores.map(score => {
                 return (
                     <Grid key={score.id} item xs={12} lg={12}>
-                        <HoleScoreItem  score={score} />
+                        <HoleScoreItem  
+                            score={score} 
+                            course={course}
+                            round={round} />
                     </Grid>
                 )
             })}

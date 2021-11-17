@@ -13,7 +13,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT hole_scores.id, holes.hole_number, 
         hole_scores.score, holes.par_score FROM hole_scores
         JOIN holes on hole_scores.hole_id = holes.id
-        WHERE hole_scores.round_id=$1;
+        WHERE hole_scores.round_id=$1
+        ORDER BY holes.hole_number;
         `;
     pool.query(queryText, values)
         .then(response => {
