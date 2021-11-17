@@ -84,7 +84,6 @@ function HoleScoreView() {
     // call useEffect to grab the current course from state immediately upon render
     useEffect(() => {
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: course});
-        // setNewScore(currentCourse[id-1].par_score);
     }, [dispatch]);
    
     return (
