@@ -38,7 +38,6 @@ function App() {
     <Router>
       <div>
         <Nav />
-        <h1>Hello World</h1>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -50,6 +49,27 @@ function App() {
           >
             <AboutPage />
           </Route>
+
+          <ProtectedRoute
+            exact
+            path="/rounds"
+          >
+            <RoundsView />
+          </ProtectedRoute>
+
+          <ProtectedRoute 
+              exact path='/activeround/:course/:id/:round?' 
+              children={<HoleScoreView />} />
+          
+          <ProtectedRoute
+            exact
+            path="/info"
+          >
+            <InfoPage />
+          </ProtectedRoute>     
+            
+          <ProtectedRoute exact path='/review/:round?' 
+              children={<ReviewRoundView />} />
 
           <Route
             exact
@@ -64,46 +84,7 @@ function App() {
               <LandingPage />
             }
           </Route>
-
-          <Route
-            exact
-            path="/login"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/rounds" />
-              :
-              // Otherwise, show the login page
-              <LoginPage />
-            }
-          </Route>
-
-          <Switch>
-            <ProtectedRoute exact path='/review/:round?' 
-              children={<ReviewRoundView />} />
-          </Switch>
-          
-          <ProtectedRoute
-            exact
-            path="/rounds"
-          >
-            <RoundsView />
-          </ProtectedRoute>
-         
-          <Switch>
-            <ProtectedRoute 
-              exact path='/activeround/:course/:id/:round?' 
-              children={<HoleScoreView />} />
-          </Switch>
-          
-          <ProtectedRoute
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute>
-
+                   
           <Route
             exact
             path="/login"
