@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Card, CardActions, CardContent, Typography, Button } from '@mui/material';
+import { Card, CardActions, CardContent, Typography, Button, IconButton } from '@mui/material';
+import { Edit, Delete } from '@mui/icons-material';
 
 // creating a round component for each individual round item for ease of selecting and styling
 // pass in the round from the RoundsView array map
@@ -52,10 +53,22 @@ function RoundItem({ round }) {
                     {convertScore(round.total_score)}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <IconButton aria-label="edit"
+                        color="secondary"
+                        onClick={() => editRound(rouund.courseid)}
+                        >
+                    <Edit />
+                </IconButton>
                 <Button size="large" 
                         variant="outlined"
                         onClick={() => addRound(round.courseid)}>PLAY AGAIN</Button>
+                <IconButton aria-label="delete"
+                        color="error"
+                        onClick={() => editRound(rouund.courseid)}
+                        >
+                    <Delete />
+                </IconButton>
             </CardActions>
         </Card>
     )
