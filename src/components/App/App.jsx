@@ -21,7 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RoundsView from '../RoundsView/RoundsView';
 import HoleScoreView from '../HoleScoreView/HoleScoreView';
-import ReviewRound from '../ReviewRound/ReviewRound';
+import ReviewRoundView from '../ReviewRound/ReviewRound';
 
 import './App.css';
 
@@ -70,7 +70,7 @@ function App() {
           {/* create a protected route with params for reviewing a round */}
           <Switch>
             <ProtectedRoute exact path='/review/:round' 
-              children={<ReviewRound />} />
+              children={<ReviewRoundView />} />
           </Switch>
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
