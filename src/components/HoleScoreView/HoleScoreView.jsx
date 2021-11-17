@@ -10,7 +10,7 @@ function HoleScoreView() {
     // set UseHistory hook to a variable
     const history = useHistory();
     // set the course id and hole number equal to what is currently in params
-    let { course, id, round } = useParams();
+    let { course, id, round, holeScore } = useParams();
     // grab the active courses array of holes from the Redux store
     const currentCourse = useSelector((store) => store.currentCourse);
     // grab the active round data from the activeRound reducer
@@ -37,6 +37,7 @@ function HoleScoreView() {
     console.log('Active hole is: ', activeHole);
     console.log('Active hole ID is: ', activeHole.id);
     console.log('Active hole number is: ', activeHole.hole_number);
+    console.log('Active holescore ID is: ', holeScore);
     // set a local state for the new hole information
     let [newScore, setNewScore] = useState(3);
     let [newNote, setNewNote] = useState('');
@@ -53,17 +54,28 @@ function HoleScoreView() {
         event.preventDefault();
         // define the new holeScore using the state variables
         let newHoleScore = {
+            holeScore_id: holeScore,
             round_id: round,
             hole_id: activeHole.id,
             score: newScore,
             note_content: newNote
         }
         console.log(newHoleScore);
-        dispatch({
-            type: 'ADD_HOLE_SCORE',
-            payload: newHoleScore
-        });
-        history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}`)
+        if (!holeScore) {
+            dispatch({
+                type: 'ADD_HOLE_SCORE',
+                payload: newHoleScore
+            });
+            history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}`)
+        } else {
+            dispatch({
+                type: 'CHANGE_HOLE_SCORE',
+                payload: newHoleScore
+            });
+            history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}/${holeScore + 1}`)
+
+        }
+        
     }
     // define reviewRound to submit last hole and go to the Review Round View
     function reviewRound(event) {

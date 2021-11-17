@@ -25,8 +25,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         })    
 })
 
-
-
 // POST a new hole score
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('POST new HoleScore:', req.body);
@@ -42,6 +40,25 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     }).catch((error) => {
         console.log('POST newholescore EROR', error);
         res.sendStatus(500);
+    })
+})
+
+// PUT a new hole score
+router.put('/', rejectUnauthenticated, (req,res) => {
+    console.log('CHANGE new HoleScore:', req.body);
+    // define the SQL query to change the hole score
+    const changeScoreQuery = `
+    UPDATE hole_scores
+    SET score = $1, note_content = $2
+    WHERE id = $3;`
+    const values = [req.body.score, req.body.note_content, req.body.holeScore_id];
+    pool.query(changeScoreQuery, values)
+    .then((result) => {
+        console.log('PUT holeScore SUCCESS');
+        res.sendStatus(201);        
+    }).catch((error) => {
+        console.log('PUT holeScore ERROR', error);
+        res.sendStatus(500);        
     })
 })
 

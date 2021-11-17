@@ -58,7 +58,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute 
-              exact path='/activeround/:course/:id/:round?' 
+              exact path='/activeround/:course/:id/:round?/:holescore?' 
               children={<HoleScoreView />} />
           
           <ProtectedRoute
