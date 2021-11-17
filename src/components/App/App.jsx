@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RoundsView from '../RoundsView/RoundsView';
 import HoleScoreView from '../HoleScoreView/HoleScoreView';
+import ReviewRound from '../ReviewRound/ReviewRound';
 
 import './App.css';
 
@@ -61,13 +62,16 @@ function App() {
           >
             <RoundsView />
           </ProtectedRoute>
-
+          {/* create a protected route with params for entering hole scores */}
           <Switch>
             <ProtectedRoute exact path='/activeround/:course/:id/:round?' 
               children={<HoleScoreView />} />
           </Switch>
-          
-
+          {/* create a protected route with params for reviewing a round */}
+          <Switch>
+            <ProtectedRoute exact path='/review/:round' 
+              children={<ReviewRound />} />
+          </Switch>
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact

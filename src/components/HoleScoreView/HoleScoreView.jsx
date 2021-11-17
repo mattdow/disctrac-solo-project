@@ -32,11 +32,11 @@ function HoleScoreView() {
         } // end of for loop
     } // end of findActiveHole fxn
     findActiveHole();
-    console.log('ACtive course is: ', course);
-    console.log('Active round is: ', round);
-    console.log('Active hole is: ', activeHole);
-    console.log('Active hole ID is: ', activeHole.id);
-    console.log('Active hole number is: ', activeHole.hole_number);
+    // console.log('ACtive course is: ', course);
+    // console.log('Active round is: ', round);
+    // console.log('Active hole is: ', activeHole);
+    // console.log('Active hole ID is: ', activeHole.id);
+    // console.log('Active hole number is: ', activeHole.hole_number);
     // set a local state for the new hole information
     let [newScore, setNewScore] = useState(3);
     let [newNote, setNewNote] = useState('');
@@ -49,7 +49,7 @@ function HoleScoreView() {
         return setNewScore(newScore + 1);
     } 
     // define submitScore to post new holeScore to DB and refresh the holeScore view
-    function submitScore() {
+    function submitScore(event) {
         event.preventDefault();
         // define the new holeScore using the state variables
         let newHoleScore = {
@@ -64,6 +64,22 @@ function HoleScoreView() {
             payload: newHoleScore
         });
         history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}`)
+    }
+    // define reviewRound to submit last hole and go to the Review Round View
+    function reviewRound(event) {
+        event.preventDefault();
+        let newHoleScore = {
+            round_id: round,
+            hole_id: activeHole.id,
+            score: newScore,
+            note_content: newNote
+        }
+        console.log(newHoleScore);
+        dispatch({
+            type: 'ADD_HOLE_SCORE',
+            payload: newHoleScore
+        });
+        history.push(`/review/${round}`)
     }
     // call useEffect to grab the current course from state immediately upon render
     useEffect(() => {
@@ -97,6 +113,8 @@ function HoleScoreView() {
                 onChange={(e) => setNewNote(e.target.value)}
                         />
             {(activeHole.hole_number < currentCourse.length) && <Button onClick={submitScore}>NEXT</Button>}
+            <Button onClick={reviewRound}
+            >REVIEW ROUND</Button>
         </section>
     )
 
