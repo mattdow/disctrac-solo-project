@@ -3,6 +3,30 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+
+// GET hole scores and hole info for a given round
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('In GET route for hole scores with round ID', req.params.id);
+    // assign the search parameter to the ID parameter from ReviewRound view request
+    const values = [req.params.id];
+    // query the DB to provide scores and hole info we need for the hole score cards
+    const queryText = `SELECT holes.hole_number, 
+        hole_scores.score, holes.par_score FROM hole_scores
+        JOIN holes on hole_scores.hole_id = holes.id
+        WHERE hole_scores.round_id=$1;
+        `;
+    pool.query(queryText, values)
+        .then(response => {
+            //return an array of objects with the hole score info
+            res.send(response.rows)
+        }).catch(err => {
+            console.log('Error on holescore GET', err);
+            res.sendStatus(500);            
+        })    
+})
+
+
+
 // POST a new hole score
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('POST new HoleScore:', req.body);

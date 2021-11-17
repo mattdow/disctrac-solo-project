@@ -119,3 +119,47 @@ This code is also heavily commented. We recommend reading through the comments, 
 ## Update Documentation
 
 Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+
+
+<Route
+            exact
+            path="/login"
+          >
+            {user.id ?
+              // If the user is already logged in, 
+              // redirect to the /user page
+              <Redirect to="/rounds" />
+              :
+              // Otherwise, show the login page
+              <LoginPage />
+            }
+          </Route>
+
+          <Route
+            exact
+            path="/home"
+          >
+            {user.id ?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <Redirect to="/rounds" />
+              :
+              // Otherwise, show the Landing page
+              <LandingPage />
+            }
+          </Route>
+
+          {/* For protected routes, the view could show one of several things on the same route.
+            Visiting localhost:3000/user will show the UserPage if the user is logged in.
+            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+
+            {/* create a protected route with params for entering hole scores */}
+            {/* create a protected route with params for reviewing a round */}
+
+            <Switch>
+            <ProtectedRoute exact path='/review/:round?' 
+              children={<ReviewRoundView />} />
+          </Switch>
+
+

@@ -44,42 +44,47 @@ function App() {
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
-            // shows AboutPage at all times (logged in or not)
             exact
             path="/about"
           >
             <AboutPage />
           </Route>
 
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <ProtectedRoute
-            // logged in shows RoundsView else shows LoginPage
             exact
             path="/rounds"
           >
             <RoundsView />
           </ProtectedRoute>
-          {/* create a protected route with params for entering hole scores */}
-          <Switch>
-            <ProtectedRoute exact path='/activeround/:course/:id/:round?' 
+
+          <ProtectedRoute 
+              exact path='/activeround/:course/:id/:round?' 
               children={<HoleScoreView />} />
-          </Switch>
-          {/* create a protected route with params for reviewing a round */}
-          <Switch>
-            <ProtectedRoute exact path='/review/:round' 
-              children={<ReviewRoundView />} />
-          </Switch>
+          
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >
             <InfoPage />
-          </ProtectedRoute>
+          </ProtectedRoute>     
+            
+          <ProtectedRoute exact path='/review/:round?' 
+              children={<ReviewRoundView />} />
 
+          <Route
+            exact
+            path="/home"
+          >
+            {user.id ?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <Redirect to="/rounds" />
+              :
+              // Otherwise, show the Landing page
+              <LandingPage />
+            }
+          </Route>
+                   
           <Route
             exact
             path="/login"
@@ -107,21 +112,6 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
-          <Route
-            exact
-            path="/home"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/rounds" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
-          </Route>
-
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

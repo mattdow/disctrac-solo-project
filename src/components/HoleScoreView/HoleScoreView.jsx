@@ -79,7 +79,7 @@ function HoleScoreView() {
             type: 'ADD_HOLE_SCORE',
             payload: newHoleScore
         });
-        history.push(`/review/`)
+        history.push(`/review/${round}`)
     }
     // call useEffect to grab the current course from state immediately upon render
     useEffect(() => {
