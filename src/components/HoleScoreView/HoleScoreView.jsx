@@ -32,11 +32,11 @@ function HoleScoreView() {
         } // end of for loop
     } // end of findActiveHole fxn
     findActiveHole();
-    // console.log('ACtive course is: ', course);
-    // console.log('Active round is: ', round);
-    // console.log('Active hole is: ', activeHole);
-    // console.log('Active hole ID is: ', activeHole.id);
-    // console.log('Active hole number is: ', activeHole.hole_number);
+    console.log('ACtive course is: ', course);
+    console.log('Active round is: ', round);
+    console.log('Active hole is: ', activeHole);
+    console.log('Active hole ID is: ', activeHole.id);
+    console.log('Active hole number is: ', activeHole.hole_number);
     // set a local state for the new hole information
     let [newScore, setNewScore] = useState(3);
     let [newNote, setNewNote] = useState('');

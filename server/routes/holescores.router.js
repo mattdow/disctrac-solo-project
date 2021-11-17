@@ -10,7 +10,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     // assign the search parameter to the ID parameter from ReviewRound view request
     const values = [req.params.id];
     // query the DB to provide scores and hole info we need for the hole score cards
-    const queryText = `SELECT holes.hole_number, 
+    const queryText = `SELECT hole_scores.id, holes.hole_number, 
         hole_scores.score, holes.par_score FROM hole_scores
         JOIN holes on hole_scores.hole_id = holes.id
         WHERE hole_scores.round_id=$1;
