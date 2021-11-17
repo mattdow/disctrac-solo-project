@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import roundsSaga from './rounds.saga';
 import currentCourseSaga from './currentCourse.saga';
 import coursesSaga from './courses.saga';
+import holeScoreSaga from './holeScore.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     roundsSaga(),
     currentCourseSaga(),
     coursesSaga(),
+    holeScoreSaga(),
   ]);
 }
 

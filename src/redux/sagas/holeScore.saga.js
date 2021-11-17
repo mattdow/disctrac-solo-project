@@ -12,7 +12,9 @@ function* postNewHoleScore(action) {
     }
 } // end of postNewHoleScore
 
-function* roundsSaga() {
+function* holeScoreSaga() {
 
     yield takeLatest('ADD_HOLE_SCORE', postNewHoleScore);
 }
+
+export default holeScoreSaga;

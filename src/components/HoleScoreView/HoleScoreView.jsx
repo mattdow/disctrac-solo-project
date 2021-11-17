@@ -53,7 +53,7 @@ function HoleScoreView() {
         event.preventDefault();
         // define the new holeScore using the state variables
         let newHoleScore = {
-            round_id: activeRound.round_id,
+            round_id: round,
             hole_id: activeHole.id,
             score: newScore,
             note_content: newNote
@@ -77,7 +77,7 @@ function HoleScoreView() {
                 Hole {activeHole.hole_number} of {currentCourse.length}
             </Typography>
             <Typography variant="h5">
-                Par {activeHole.par_score} {activeHole.hole_length} feet
+                Par {activeHole.par_score} - {activeHole.hole_length} feet
             </Typography>
             <Typography variant="body1">
                 Notes

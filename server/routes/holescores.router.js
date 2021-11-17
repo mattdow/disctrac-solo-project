@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 // POST a new hole score
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.body);
+    console.log('POST new HoleScore:', req.body);
     // define the SQL query to post the new hole score
     const newHoleScoreQuery = `
         INSERT INTO hole_scores (round_id, hole_id, score, note_content)
