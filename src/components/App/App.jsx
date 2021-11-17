@@ -131,9 +131,6 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
-          
-
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
