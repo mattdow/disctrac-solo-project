@@ -78,27 +78,25 @@ function App() {
               <LoginPage />
             }
           </Route>
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+
+          <Switch>
+            <ProtectedRoute exact path='/review/:round?' 
+              children={<ReviewRoundView />} />
+          </Switch>
+          
           <ProtectedRoute
             exact
             path="/rounds"
           >
             <RoundsView />
           </ProtectedRoute>
-         {/* create a protected route with params for entering hole scores */}
+         
           <Switch>
             <ProtectedRoute 
               exact path='/activeround/:course/:id/:round?' 
               children={<HoleScoreView />} />
           </Switch>
-          {/* create a protected route with params for reviewing a round */}
-          <Switch>
-            <ProtectedRoute exact path='/review/:round' 
-              children={<ReviewRoundView />} />
-          </Switch>
+          
           <ProtectedRoute
             exact
             path="/info"

@@ -155,5 +155,11 @@ Customize this ReadMe and the code comments in this project to read less like a 
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
             {/* create a protected route with params for entering hole scores */}
+            {/* create a protected route with params for reviewing a round */}
+
+            <Switch>
+            <ProtectedRoute exact path='/review/:round?' 
+              children={<ReviewRoundView />} />
+          </Switch>
 
 
