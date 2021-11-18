@@ -6,6 +6,7 @@ import currentCourse from './currentCourse.reducer';
 import courses from './courses.reducer';
 import activeRound from './activeRound.reducer';
 import holeScore from './holeScore.reducer';
+import holeNote from './holeNote.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   courses, // an array of courses in the DB
   activeRound, // an object of the round to be added / edited into the DB
   holeScore, // array of hole scores from the active round from the DB
+  holeNote, // array of hole notes from same user and hole
 });
 
 export default rootReducer;
