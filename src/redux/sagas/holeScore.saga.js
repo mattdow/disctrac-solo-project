@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { response } from 'express';
 import { put, takeLatest } from 'redux-saga/effects';
 // create a generator function to add a hole score
 function* postNewHoleScore(action) {
@@ -51,7 +50,9 @@ function* changeHoleScore(action) {
 function* fetchSelectedHS(action) {
     console.log('In fetchSelectedHS for HS ID:', action.payload);
     try {
-        yield axios.get(`api/holescores/${action.payload}`);
+        const response = yield axios.get(`api/selectedhole/${action.payload}`);
+        console.log('Response from fetchSelHS:', response);
+        
         yield put({ type: 'SET_SELECTED_HS', payload: response.data })
     } catch(err) {
         yield put({ type: 'FETCH_SELECTED_HS_ERROR'});

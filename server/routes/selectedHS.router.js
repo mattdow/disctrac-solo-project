@@ -16,8 +16,10 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         `;
     pool.query(queryText, values)
         .then(response => {
+            console.log('selHS response rows:', response.rows);
+            
             //return the object with Hole Score info
-            res.send(response.rows)
+            res.send(response.rows);
         }).catch(err => {
             console.log('Error on selected HS', err);
             res.sendStatus(500);

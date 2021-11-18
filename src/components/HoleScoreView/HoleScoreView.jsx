@@ -22,24 +22,25 @@ function HoleScoreView() {
     if (!round) {
         round = activeRound.round_id;
     }
+    const activeHole = useSelector((store) => store.selectedHS);;
     // Using the ID from params, I'll search through the current course array to pick out the correct hole to display
-    let activeHole = {};
-    function findActiveHole() {
-        // loop through the holes in the current course
-        for (let hole of currentCourse) {
-            // check if the hole number (not hole ID!) matches the params ID
-            if (hole.hole_number === Number(id)) {
-                activeHole = hole;
+    
+    // function findActiveHole() {
+    //     // loop through the holes in the current course
+    //     for (let hole of currentCourse) {
+    //         // check if the hole number (not hole ID!) matches the params ID
+    //         if (hole.hole_number === Number(id)) {
+    //             activeHole = hole;
                 
-            } // end if statement
-        } // end of for loop
-    } // end of findActiveHole fxn
-    findActiveHole();
+    //         } // end if statement
+    //     } // end of for loop
+    // } // end of findActiveHole fxn
+    // findActiveHole();
     console.log('ACtive course is: ', course);
     console.log('Active round is: ', round);
     console.log('Active hole is: ', activeHole);
-    console.log('Active hole ID is: ', activeHole.id);
-    console.log('Active hole number is: ', activeHole.hole_number);
+    // console.log('Active hole ID is: ', activeHole.id);
+    // console.log('Active hole number is: ', activeHole.hole_number);
     console.log('Active holescore ID is: ', Number(holeScore));
     // create a function to find an active hole note (if any)
     let activeNote = {}
@@ -145,10 +146,10 @@ function HoleScoreView() {
     return (
         <section className="active-hole-view">
             <Typography variant="h4">
-                Hole {activeHole.hole_number} of {currentCourse.length}
+                {/* Hole {activeHole.hole_number} of {currentCourse.length} */}
             </Typography>
             <Typography variant="h5">
-                Par {activeHole.par_score} - {activeHole.hole_length} feet
+                {/* Par {activeHole.par_score} - {activeHole.hole_length} feet */}
             </Typography>
             {holeNotes.map((note, i) => {
                 return (
@@ -171,7 +172,7 @@ function HoleScoreView() {
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
                         />
-            {(activeHole.hole_number < currentCourse.length) && <Button onClick={submitScore}>NEXT</Button>}
+            {/* {(activeHole.hole_number < currentCourse.length) && <Button onClick={submitScore}>NEXT</Button>} */}
             <Button onClick={reviewRound}
             >REVIEW ROUND</Button>
         </section>

@@ -29,7 +29,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.get('/:course/:hole', rejectUnauthenticated, (req, res) => {
     console.log('In GET route for hole notes course ID and hole number: ', req.params.course, req.params.hole);
     // define a query string to grab an array of entered hole notes
-    const queryText = `SELECT hole_scores.id, hole_scoresnote_content 
+    const queryText = `SELECT hole_scores.id, hole_scores.note_content 
                     FROM hole_scores
                     JOIN rounds ON hole_scores.round_id = rounds.id
                     JOIN holes ON hole_scores.hole_id = holes.hole_number
