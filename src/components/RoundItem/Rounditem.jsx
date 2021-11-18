@@ -36,6 +36,12 @@ function RoundItem({ round }) {
         }})
         history.push(`/activeround/${courseID}/1`);
     } // end of addRound
+    //define a function for actions to run when an edit button is clicked
+    const editRound = (round) => {
+        // route to a review round view for the round and course ID corresponding to the clicked card
+        history.push(`review/${round.id}/${round.courseid}`)
+    }
+    
 
     return (
         <Card variant="outlined" sx={{my:2}}>
@@ -56,7 +62,7 @@ function RoundItem({ round }) {
             <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <IconButton aria-label="edit"
                         color="secondary"
-                        onClick={() => editRound(rouund.courseid)}
+                        onClick={() => editRound(round)}
                         >
                     <Edit />
                 </IconButton>
@@ -65,7 +71,7 @@ function RoundItem({ round }) {
                         onClick={() => addRound(round.courseid)}>PLAY AGAIN</Button>
                 <IconButton aria-label="delete"
                         color="error"
-                        onClick={() => editRound(rouund.courseid)}
+                        onClick={() => deleteRound(round.courseid)}
                         >
                     <Delete />
                 </IconButton>
