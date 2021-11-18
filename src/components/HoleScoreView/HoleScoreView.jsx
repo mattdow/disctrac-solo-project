@@ -9,7 +9,7 @@ function HoleScoreView() {
     const dispatch = useDispatch();
     // set UseHistory hook to a variable
     const history = useHistory();
-    // set the course id and hole number equal to what is currently in params
+    // set the course id, hole number, round ID, and holeScore ID equal to what is currently in params
     let { course, id, round, holeScore } = useParams();
     // grab the active courses array of holes from the Redux store
     const currentCourse = useSelector((store) => store.currentCourse);
