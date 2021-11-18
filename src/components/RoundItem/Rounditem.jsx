@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Card, CardActions, CardContent, Typography, Button, IconButton } from '@mui/material';
 import { Edit, Delete } from '@mui/icons-material';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 // creating a round component for each individual round item for ease of selecting and styling
 // pass in the round from the RoundsView array map
@@ -69,12 +70,7 @@ function RoundItem({ round }) {
                 <Button size="large" 
                         variant="outlined"
                         onClick={() => addRound(round.courseid)}>PLAY AGAIN</Button>
-                <IconButton aria-label="delete"
-                        color="error"
-                        onClick={() => deleteRound(round.courseid)}
-                        >
-                    <Delete />
-                </IconButton>
+                <DeleteModal round={round}/>
             </CardActions>
         </Card>
     )

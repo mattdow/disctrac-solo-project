@@ -49,4 +49,24 @@ router.post('/', (req, res) => {
     })
 })
 
+// create a delete route to delete a user round, double checking to make sure ID matches
+
+router.delete("/:id", rejectUnauthenticated, (req, res) => {
+    // define the query text to delete if round ID and user_id is correct
+    const queryText = `
+        DELETE FROM rounds
+        WHERE id = $1
+        AND user_id = $2;
+    `;
+    // define our sanitized parameters
+    const values = [req.params.id, req.user.id];
+    pool.query(queryText, values)
+        .then(result => {
+            res.sendStatus(204);
+        }).catch(err => {
+            console.log('Error in round delete:', err);
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;
