@@ -25,7 +25,7 @@ function* fetchHoleScores(action) {
 }
 
 // create a generator function to fetch the appropriate hole notes
-function* fetchHoleNotes() {
+function* fetchHoleNotes(action) {
     console.log('In fetchHoleNotes with payload:', action.payload);
     try {
         const response = yield axios.get(`api/holescores/${action.payload.course}/${action.payload.hole}`)

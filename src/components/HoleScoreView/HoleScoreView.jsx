@@ -13,7 +13,10 @@ function HoleScoreView() {
     let { course, id, round, holeScore } = useParams();
     // grab the active courses array of holes from the Redux store
     const currentCourse = useSelector((store) => store.currentCourse);
+    // grab any active hole notes for this user and hole
+    const holeNotes = useSelector((store) => store.holeNote);
     // grab the active round data from the activeRound reducer
+    console.log(holeNotes);
     const activeRound = useSelector((store) => store.activeRound);
     // if there is no round parameter in the URL, use the active round data
     if (!round) {
@@ -110,9 +113,14 @@ function HoleScoreView() {
         }
        
     }
-    // call useEffect to grab the current course from state immediately upon render
+    // call useEffect to grab the current course and any hole notes for this user and for this hole from state immediately upon render
     useEffect(() => {
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: course});
+        dispatch({ type: 'FETCH_HOLE_NOTES', 
+            payload: {
+                course: course,
+                hole:id
+        }});
     }, [dispatch]);
    
     return (
@@ -123,9 +131,13 @@ function HoleScoreView() {
             <Typography variant="h5">
                 Par {activeHole.par_score} - {activeHole.hole_length} feet
             </Typography>
-            <Typography variant="body1">
-                Notes
-            </Typography>
+            {holeNotes.map((note, i) => {
+                return (
+                    <Typography key={i} variant="body1">
+                        {note.note_content}
+                    </Typography>
+                )
+                })}
             <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
                 <Button onClick={decreaseScore}>-</Button>
                 <Typography variant="h3">
