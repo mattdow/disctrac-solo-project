@@ -40,10 +40,24 @@ function HoleScoreView() {
     console.log('Active hole is: ', activeHole);
     console.log('Active hole ID is: ', activeHole.id);
     console.log('Active hole number is: ', activeHole.hole_number);
-    console.log('Active holescore ID is: ', holeScore);
+    console.log('Active holescore ID is: ', Number(holeScore));
+    // create a function to find an active hole note (if any)
+    let activeNote = {}
+    function findActiveNote() {
+        // loop through the notes in the reducer
+        for (let note of holeNotes) {
+            // check if the hole score ID matches active hole score from params
+            if(note.id === Number(holeScore)) {
+                activeNote = note;
+            } // end if statement
+        }
+    }
+    findActiveNote();
+    console.log('Active note is:', activeNote);
     // set a local state for the new hole information
     let [newScore, setNewScore] = useState(3);
-    let [newNote, setNewNote] = useState('');
+    let [newNote, setNewNote] = useState(activeNote.note_content);
+    
     // define decreaseScore to decrement
     const decreaseScore = (event) => {
         return setNewScore(newScore - 1);
@@ -121,7 +135,12 @@ function HoleScoreView() {
                 course: course,
                 hole:id
         }});
+        dispatch({ type: 'FETCH_SELECTED_HS', payload: holeScore})
     }, [dispatch]);
+
+    // useEffect(() => {
+    //     console.log('In useEffect for note content');
+    // }, [activeNote.note_content] )
    
     return (
         <section className="active-hole-view">
@@ -141,7 +160,7 @@ function HoleScoreView() {
             <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
                 <Button onClick={decreaseScore}>-</Button>
                 <Typography variant="h3">
-                    {newScore}
+                            {newScore}
                 </Typography>
                 <Button onClick={increaseScore}>+</Button>
             </Box>
