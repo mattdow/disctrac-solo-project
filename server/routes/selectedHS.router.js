@@ -9,17 +9,17 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     // assign the sanitized parameter to the holeScore ID from HoleScoreView
     const values = [req.params.id];
     // query the DB to provide hole scores and hole info we need for HS view
-    const queryText = `SELECT hole_scores.id, holes.           hole_number, 
+    const queryText = `SELECT hole_scores.id, holes.hole_number, holes.hole_length,
     hole_scores.note_content, hole_scores.score, holes.par_score 
     FROM hole_scores JOIN holes on hole_scores.hole_id = holes.id
     WHERE hole_scores.id=$1;
         `;
     pool.query(queryText, values)
         .then(response => {
-            console.log('selHS response rows:', response.rows);
+            console.log('selHS response rows:', response.rows[0]);
             
             //return the object with Hole Score info
-            res.send(response.rows);
+            res.send(response.rows[0]);
         }).catch(err => {
             console.log('Error on selected HS', err);
             res.sendStatus(500);

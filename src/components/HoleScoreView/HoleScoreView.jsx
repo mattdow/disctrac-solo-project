@@ -43,21 +43,21 @@ function HoleScoreView() {
     // console.log('Active hole number is: ', activeHole.hole_number);
     console.log('Active holescore ID is: ', Number(holeScore));
     // create a function to find an active hole note (if any)
-    let activeNote = {}
-    function findActiveNote() {
-        // loop through the notes in the reducer
-        for (let note of holeNotes) {
-            // check if the hole score ID matches active hole score from params
-            if(note.id === Number(holeScore)) {
-                activeNote = note;
-            } // end if statement
-        }
-    }
-    findActiveNote();
-    console.log('Active note is:', activeNote);
+    // let activeNote = {}
+    // function findActiveNote() {
+    //     // loop through the notes in the reducer
+    //     for (let note of holeNotes) {
+    //         // check if the hole score ID matches active hole score from params
+    //         if(note.id === Number(holeScore)) {
+    //             activeNote = note;
+    //         } // end if statement
+    //     }
+    // }
+    // findActiveNote();
+    // console.log('Active note is:', activeNote);
     // set a local state for the new hole information
-    let [newScore, setNewScore] = useState(3);
-    let [newNote, setNewNote] = useState(activeNote.note_content);
+    let [newScore, setNewScore] = useState(activeHole.score);
+    let [newNote, setNewNote] = useState(activeHole.note_content);
     
     // define decreaseScore to decrement
     const decreaseScore = (event) => {
@@ -146,10 +146,10 @@ function HoleScoreView() {
     return (
         <section className="active-hole-view">
             <Typography variant="h4">
-                {/* Hole {activeHole.hole_number} of {currentCourse.length} */}
+                Hole {activeHole.hole_number} of {currentCourse.length}
             </Typography>
             <Typography variant="h5">
-                {/* Par {activeHole.par_score} - {activeHole.hole_length} feet */}
+               Par {activeHole.par_score} - {activeHole.hole_length} feet 
             </Typography>
             {holeNotes.map((note, i) => {
                 return (
