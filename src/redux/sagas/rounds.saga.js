@@ -17,6 +17,7 @@ function* postNewRound(action) {
     try {
         const response = yield axios.post('/api/rounds', action.payload);
         yield console.log('New Round POST response is: ', response.data);
+        // call SET_ROUND_ID to provide info to the activeRound reducer
         yield put({type: 'SET_ROUND_ID', payload: response.data.round_id});
         // may need to fetch the new rounds list
         yield put ({type: 'FETCH_ROUNDS'});
@@ -27,10 +28,23 @@ function* postNewRound(action) {
 
 } // end of postNewRound
 
+// define a function to send a delete round query to server/DB
+function* deleteRound(action) {
+    try {
+        yield axios.delete(`/api/rounds/${action.payload}`);
+        // fetch the rounds list again, should reflect delete
+        yield put({ type: 'FETCH_ROUNDS'})
+    } catch (err) {
+        yield put({ type: 'DELETE_ROUND_ERROR'});
+        console.log(err);
+    }
+}
+
 function* roundsSaga() {
     // watching for actions related to the user's rounds
     yield takeLatest('FETCH_ROUNDS', fetchRounds);
     yield takeLatest('START_NEW_ROUND', postNewRound);
+    yield takeLatest('DELETE_ROUND', deleteRound);
 }
 
 export default roundsSaga;

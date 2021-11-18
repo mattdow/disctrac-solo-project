@@ -59,7 +59,7 @@ router.delete("/:id", rejectUnauthenticated, (req, res) => {
         AND user_id = $2;
     `;
     // define our sanitized parameters
-    const values = [req.params.id, req.user.id];
+    const values = [Number(req.params.id), req.user.id];
     pool.query(queryText, values)
         .then(result => {
             res.sendStatus(204);

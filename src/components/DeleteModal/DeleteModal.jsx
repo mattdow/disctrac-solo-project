@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, IconButton } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,6 +10,7 @@ import { Delete } from '@mui/icons-material';
 
 function DeleteModal(round) {
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -19,7 +21,9 @@ function DeleteModal(round) {
   };
 
   const deleteRound = () => {
-      
+    console.log(round.round.id);
+    dispatch({ type: 'DELETE_ROUND', payload: round.round.id});
+    setOpen(false);
   }
 
   return (
@@ -46,7 +50,7 @@ function DeleteModal(round) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Go Back</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={deleteRound} autoFocus>
             Delete
           </Button>
         </DialogActions>
