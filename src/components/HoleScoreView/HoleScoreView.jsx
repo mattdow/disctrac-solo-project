@@ -22,20 +22,20 @@ function HoleScoreView() {
     if (!round) {
         round = activeRound.round_id;
     }
-    const activeHole = useSelector((store) => store.selectedHS);;
+    const activeHoleScore = useSelector((store) => store.selectedHS);;
     // Using the ID from params, I'll search through the current course array to pick out the correct hole to display
-    
-    // function findActiveHole() {
-    //     // loop through the holes in the current course
-    //     for (let hole of currentCourse) {
-    //         // check if the hole number (not hole ID!) matches the params ID
-    //         if (hole.hole_number === Number(id)) {
-    //             activeHole = hole;
+    let activeHole = {}
+    function findActiveHole() {
+        // loop through the holes in the current course
+        for (let hole of currentCourse) {
+            // check if the hole number (not hole ID!) matches the params ID
+            if (hole.hole_number === Number(id)) {
+                activeHole = hole;
                 
-    //         } // end if statement
-    //     } // end of for loop
-    // } // end of findActiveHole fxn
-    // findActiveHole();
+            } // end if statement
+        } // end of for loop
+    } // end of findActiveHole fxn
+    findActiveHole();
     console.log('ACtive course is: ', course);
     console.log('Active round is: ', round);
     console.log('Active hole is: ', activeHole);
@@ -139,10 +139,11 @@ function HoleScoreView() {
         dispatch({ type: 'FETCH_SELECTED_HS', payload: holeScore})
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     console.log('In useEffect for note content');
-    // }, [activeNote.note_content] )
-   
+    useEffect(() => {
+        setNewScore(activeHole.score);
+        setNewNote(activeHole.note_content);
+    }, [activeHole] )
+    console.log('Checking active hole note: ', newNote);
     return (
         <section className="active-hole-view">
             <Typography variant="h4">
@@ -166,13 +167,13 @@ function HoleScoreView() {
                 <Button onClick={increaseScore}>+</Button>
             </Box>
             <TextField 
-                variant="outlined" 
-                label="Hole Notes"
+                id="outlined-helper-text" 
+                helperText="Hole Notes"
                 fullWidth
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
                         />
-            {/* {(activeHole.hole_number < currentCourse.length) && <Button onClick={submitScore}>NEXT</Button>} */}
+            {(activeHole.hole_number < currentCourse.length) && <Button onClick={submitScore}>NEXT</Button>}
             <Button onClick={reviewRound}
             >REVIEW ROUND</Button>
         </section>
