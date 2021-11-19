@@ -12,7 +12,12 @@ function CoursesView(){
     const dispatch = useDispatch();
     // set history hook as a variable for use
     const history = useHistory();
-    
+    // grab the array of courses from the Redux store
+    const courses = useSelector(store => store.courses);
+    // call useEffect hook to populate the list with rounds
+    useEffect(() => {
+        dispatch({ type: 'FETCH_COURSES' });
+    }, [dispatch]);
 
 }
 export default CoursesView
