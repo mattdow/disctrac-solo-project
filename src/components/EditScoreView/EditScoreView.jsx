@@ -136,10 +136,10 @@ function HoleScoreView() {
     console.log('Checking active hole note: ', activeHoleScore.note_content);
     return (
         <section className="active-hole-view">
-            <Typography variant="h4">
+            <Typography variant="h4" align="center" sx={{mb:2}}>
                 Hole {activeHole.hole_number} of {currentCourse.length}
             </Typography>
-            <Typography variant="h5">
+            <Typography variant="h5" align="center" sx={{mb:2}}>
                Par {activeHole.par_score} - {activeHole.hole_length} feet 
             </Typography>
             {holeNotes.map((note, i) => {
@@ -149,7 +149,7 @@ function HoleScoreView() {
                     </Typography>
                 )
                 })}
-            <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
+            <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around', my:2}}>
                 <Button onClick={decreaseScore}>-</Button>
                 <Typography variant="h3">
                             {newScore}

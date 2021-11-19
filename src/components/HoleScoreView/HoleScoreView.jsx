@@ -25,19 +25,6 @@ function HoleScoreView() {
     }
     console.log(round);
     // const activeHoleScore = useSelector((store) => store.selectedHS);
-    // Using the ID from params, I'll search through the current course array to pick out the correct hole to display
-    // let activeHole = {}
-    // function findActiveHole() {
-    //     // loop through the holes in the current course
-    //     for (let hole of currentCourse) {
-    //         // check if the hole number (not hole ID!) matches the params ID
-    //         if (hole.hole_number === Number(id)) {
-    //             activeHole = hole;
-                
-    //         } // end if statement
-    //     } // end of for loop
-    // } // end of findActiveHole fxn
-    // findActiveHole();
     
     // set a local state for the new hole information
     let [newScore, setNewScore] = useState(activeHole.par_score);
@@ -112,10 +99,10 @@ function HoleScoreView() {
 
     return (
         <section className="active-hole-view">
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" align="center" sx={{mb:2}}>
                 Hole {activeHole.hole_number} of {currentCourse.length}
             </Typography>
-            <Typography variant="h5" align="center">
+            <Typography variant="h5" align="center" sx={{mb:2}}>
                Par {activeHole.par_score} - {activeHole.hole_length} feet 
             </Typography>
             {holeNotes.map((note, i) => {
@@ -125,7 +112,7 @@ function HoleScoreView() {
                     </Typography>
                 )
                 })}
-            <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around'}}>
+            <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around', my:2}}>
                 <Button onClick={decreaseScore}>-</Button>
                 <Typography variant="h3">
                             {newScore}
@@ -133,7 +120,8 @@ function HoleScoreView() {
                 <Button onClick={increaseScore}>+</Button>
             </Box>
             <TextField 
-                id="outlined-helper-text" 
+                id="outlined-helper-text"
+                sx={{mb:2}} 
                 label="Hole Notes"
                 fullWidth
                 value={newNote}
