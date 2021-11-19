@@ -30,11 +30,12 @@ router.get('/:course/:hole', rejectUnauthenticated, (req, res) => {
     console.log('In GET route for hole notes course ID and hole number: ', req.params.course, req.params.hole);
     // define a query string to grab an array of entered hole notes
     const queryText = `SELECT hole_scores.id, hole_scores.note_content 
-                    FROM hole_scores
-                    JOIN rounds ON hole_scores.round_id = rounds.id
-                    JOIN holes ON hole_scores.hole_id = holes.hole_number
-                    WHERE rounds.user_id = $1 AND holes.course_id = $2 AND holes.hole_number = $3 
-                    AND hole_scores.note_content IS NOT NULL;`
+                        FROM hole_scores
+                        JOIN rounds ON hole_scores.round_id = rounds.id
+                        JOIN holes ON hole_scores.hole_id = holes.id
+                        WHERE rounds.user_id = $1 AND holes.course_id = $2 
+                        AND holes.hole_number = $3
+                        AND hole_scores.note_content IS NOT NULL;`
     // define an array of our sanitized parameters
     const values = [req.user.id, req.params.course, req.params.hole];
     pool.query(queryText, values)
