@@ -15,7 +15,7 @@ function HoleScoreItem({ score, course, round }) {
     
     // Define a function to route to the appropriate HoleScoreView
     function editScore() {
-        history.push(`/activeround/${course}/${score.hole_number}/${round}/${score.id}`)
+        history.push(`/editround/${course}/${score.hole_number}/${round}/${score.id}`)
     }
 
     return (

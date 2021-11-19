@@ -36,12 +36,7 @@ function HoleScoreView() {
         } // end of for loop
     } // end of findActiveHole fxn
     findActiveHole();
-    console.log('ACtive course is: ', course);
-    console.log('Active round is: ', round);
-    console.log('Active hole is: ', activeHole);
-    console.log('Active hole ID is: ', activeHoleScore.id);
-    console.log('Active hole number is: ', activeHoleScore.hole_number);
-    console.log('Active holescore ID is: ', Number(holeScore));
+    
     // create a function to find an active hole note (if any)
     // let activeNote = {}
     // function findActiveNote() {
@@ -140,9 +135,17 @@ function HoleScoreView() {
     }, [dispatch]);
 
     useEffect(() => {
-        setNewScore(activeHole.score);
+        // setNewScore(activeHole.score);
         setNewNote(activeHole.note_content);
     }, [activeHole] )
+
+    console.log('ACtive course is: ', course);
+    console.log('Active round is: ', round);
+    console.log('Active hole is: ', activeHole);
+    console.log('Active hole ID is: ', activeHoleScore.id);
+    console.log('Active hole number is: ', activeHoleScore.hole_number);
+    console.log('Active holescore ID is: ', Number(holeScore));
+
     console.log('Checking active hole note: ', newNote);
     return (
         <section className="active-hole-view">

@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import RoundsView from '../RoundsView/RoundsView';
 import HoleScoreView from '../HoleScoreView/HoleScoreView';
 import ReviewRoundView from '../ReviewRound/ReviewRound';
+import EditScoreView from '../EditScoreView/EditScoreView';
 
 import './App.css';
 
@@ -70,6 +71,11 @@ function App() {
             
           <ProtectedRoute exact path='/review/:round?/:course?' 
               children={<ReviewRoundView />} />
+
+          <ProtectedRoute 
+            exact path='/editround/:course/:id/:round?/:holeScore?'
+            children={<EditScoreView />} />
+
 
           <Route
             exact
