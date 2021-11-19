@@ -6,6 +6,7 @@ function* postNewHoleScore(action) {
     
     try {
         yield axios.post('/api/holescores', action.payload);
+        yield put({ type: 'FETCH_HOLE_SCORES', payload: action.payload.round_id})
     } catch(err) {
         yield put({ type: 'ADD_HOLE_SCORE_ERROR'});
         console.log('Error in postNewHoleScore', err);
@@ -41,11 +42,25 @@ function* changeHoleScore(action) {
     console.log('In changeHoleScore for holeScoreID: ', action.payload.holeScore_id);
     try {
         yield axios.put('api/holescores', action.payload);
+        yield put({ type: 'FETCH_HOLE_SCORES', payload: action.payload.round_id})
     } catch(err) {
         yield put({ type: 'CHANGE_HOLE_SCORE_ERROR'});
         console.log('Error in changeHoleScore', err);
     }
 } // end of changeHoleScores
+
+function* fetchSelectedHS(action) {
+    console.log('In fetchSelectedHS for HS ID:', action.payload);
+    try {
+        const response = yield axios.get(`api/selectedhole/${action.payload}`);
+        console.log('Response from fetchSelHS:', response);
+        
+        yield put({ type: 'SET_SELECTED_HS', payload: response.data })
+    } catch(err) {
+        yield put({ type: 'FETCH_SELECTED_HS_ERROR'});
+        console.log('Error in fetch sle HS', err);    
+    } 
+}
 
 function* holeScoreSaga() {
 
@@ -53,6 +68,7 @@ function* holeScoreSaga() {
     yield takeLatest('CHANGE_HOLE_SCORE', changeHoleScore);
     yield takeLatest('FETCH_HOLE_SCORES', fetchHoleScores);
     yield takeLatest('FETCH_HOLE_NOTES', fetchHoleNotes);
+    yield takeLatest('FETCH_SELECTED_HS',  fetchSelectedHS);
 }
 
 export default holeScoreSaga;

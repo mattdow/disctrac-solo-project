@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const roundsRouter = require('./routes/rounds.router');
 const coursesRouter = require('./routes/courses.router');
 const holeScoresRouter = require('./routes/holescores.router');
+const selectedHSRouter = require('./routes/selectedHS.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,6 +30,8 @@ app.use('/api/user', userRouter);
 app.use('/api/rounds', roundsRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/holescores', holeScoresRouter);
+app.use('/api/selectedhole', selectedHSRouter);
+
 
 // Serve static files
 app.use(express.static('build'));
