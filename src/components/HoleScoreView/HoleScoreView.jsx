@@ -13,6 +13,7 @@ function HoleScoreView() {
     let { course, id, round } = useParams();
     // grab the active courses array of holes from the Redux store
     const currentCourse = useSelector((store) => store.currentCourse);
+    const activeHole = useSelector((store) => store.currentHole);
     // grab any active hole notes for this user and hole
     const holeNotes = useSelector((store) => store.holeNote);
     // grab the active round data from the activeRound reducer
@@ -25,21 +26,21 @@ function HoleScoreView() {
     console.log(round);
     // const activeHoleScore = useSelector((store) => store.selectedHS);
     // Using the ID from params, I'll search through the current course array to pick out the correct hole to display
-    let activeHole = {}
-    function findActiveHole() {
-        // loop through the holes in the current course
-        for (let hole of currentCourse) {
-            // check if the hole number (not hole ID!) matches the params ID
-            if (hole.hole_number === Number(id)) {
-                activeHole = hole;
+    // let activeHole = {}
+    // function findActiveHole() {
+    //     // loop through the holes in the current course
+    //     for (let hole of currentCourse) {
+    //         // check if the hole number (not hole ID!) matches the params ID
+    //         if (hole.hole_number === Number(id)) {
+    //             activeHole = hole;
                 
-            } // end if statement
-        } // end of for loop
-    } // end of findActiveHole fxn
-    findActiveHole();
+    //         } // end if statement
+    //     } // end of for loop
+    // } // end of findActiveHole fxn
+    // findActiveHole();
     
     // set a local state for the new hole information
-    let [newScore, setNewScore] = useState(3);
+    let [newScore, setNewScore] = useState(activeHole.par_score);
     let [newNote, setNewNote] = useState('');    
     // define decreaseScore to decrement
     const decreaseScore = (event) => {
@@ -86,6 +87,10 @@ function HoleScoreView() {
     }
     // call useEffect to grab the current course and any hole notes for this user and for this hole from state immediately upon render
     useEffect(() => {
+        dispatch({ type: 'FETCH_CURRENT_HOLE', 
+            payload: {
+                course: course, 
+                id: id}});
         dispatch({ type: 'FETCH_CURRENT_COURSE', payload: course});
         dispatch({ type: 'FETCH_HOLE_NOTES', 
             payload: {
@@ -94,6 +99,10 @@ function HoleScoreView() {
         }});
         dispatch({ type: 'FETCH_ACTIVE_ROUND', payload: round})
     }, [dispatch]);
+
+    useEffect(() => {
+        setNewScore(activeHole.par_score)
+    }, [activeHole, activeRound])
 
     console.log('ACtive course is: ', course);
     console.log('Active round is: ', round);
