@@ -49,6 +49,22 @@ router.post('/', (req, res) => {
     })
 })
 
+// create a GET router to grab the newest active round when user is adding
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    // define the query text
+    const queryText = `
+        SELECT * FROM rounds
+        WHERE rounds.id = $1;
+    `;
+    pool.query(queryText, [req.params.id])
+    .then(result => {
+        console.log('New round object: ', result.rows);
+        res.send(result.rows[0]);
+    }).catch(err => {
+        console.log('Error fetching active/new round', err);
+    })
+})
+
 // create a delete route to delete a user round, double checking to make sure ID matches
 
 router.delete("/:id", rejectUnauthenticated, (req, res) => {

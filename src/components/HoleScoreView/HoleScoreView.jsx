@@ -92,6 +92,7 @@ function HoleScoreView() {
                 course: course,
                 hole: id
         }});
+        dispatch({ type: 'FETCH_ACTIVE_ROUND', payload: round})
     }, [dispatch]);
 
     console.log('ACtive course is: ', course);
