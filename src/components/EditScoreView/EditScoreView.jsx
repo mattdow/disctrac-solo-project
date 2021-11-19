@@ -52,7 +52,7 @@ function HoleScoreView() {
     // console.log('Active note is:', activeNote);
     // set a local state for the new hole information
     let [newScore, setNewScore] = useState(3);
-    let [newNote, setNewNote] = useState(activeHole.note_content);
+    let [newNote, setNewNote] = useState(activeHoleScore.note_content);
     
     // define decreaseScore to decrement
     const decreaseScore = (event) => {
@@ -121,18 +121,19 @@ function HoleScoreView() {
     }, [dispatch]);
 
     useEffect(() => {
-        // setNewScore(activeHole.score);
-        setNewNote(activeHole.note_content);
-    }, [activeHole] )
+        setNewScore(activeHoleScore.score);
+        setNewNote(activeHoleScore.note_content);
+    }, [activeHoleScore] )
 
     console.log('ACtive course is: ', course);
     console.log('Active round is: ', round);
     console.log('Active hole is: ', activeHole);
+    console.log('activeHoleScore is: ', activeHoleScore);
     console.log('Active hole ID is: ', activeHoleScore.id);
     console.log('Active hole number is: ', activeHoleScore.hole_number);
     console.log('Active holescore ID is: ', Number(holeScore));
 
-    console.log('Checking active hole note: ', newNote);
+    console.log('Checking active hole note: ', activeHoleScore.note_content);
     return (
         <section className="active-hole-view">
             <Typography variant="h4">
