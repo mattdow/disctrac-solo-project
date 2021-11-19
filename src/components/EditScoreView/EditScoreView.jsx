@@ -75,24 +75,21 @@ function HoleScoreView() {
         }
         console.log(newHoleScore);
         // if this is a new hole score, simply add to DB
-        if (!holeScore) {
-            dispatch({
-                type: 'ADD_HOLE_SCORE',
-                payload: newHoleScore
-            });
-            // route to next hole (no holescore in route)
-            history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}`)
-        // however, if we are editing, PUT to DB instead
-        } else {
+        // if (!holeScore) {
+        //     dispatch({
+        //         type: 'ADD_HOLE_SCORE',
+        //         payload: newHoleScore
+        //     });
+        //     // route to next hole (no holescore in route)
+        //     history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}`)
+        // // however, if we are editing, PUT to DB instead
+        // } else {
             dispatch({
                 type: 'CHANGE_HOLE_SCORE',
                 payload: newHoleScore
             });
             // route to next hole ()
-            history.push(`/activeround/${course}/${activeHole.hole_number+1}/${round}/${Number(holeScore) + 1}`)
-
-        }
-        
+            history.push(`/editround/${course}/${activeHole.hole_number+1}/${round}/${Number(holeScore) + 1}`)    
     }
     // define reviewRound to submit last hole and go to the Review Round View
     function reviewRound(event) {
@@ -105,23 +102,12 @@ function HoleScoreView() {
             note_content: newNote
         }
         console.log(newHoleScore);
-        if (!holeScore) {
-            dispatch({
-                type: 'ADD_HOLE_SCORE',
-                payload: newHoleScore
-            });
-            // route to review round 
-            history.push(`/review/${round}/${course}`)
-        // however, if we are editing, PUT to DB instead
-        } else {
-            dispatch({
+        dispatch({
                 type: 'CHANGE_HOLE_SCORE',
                 payload: newHoleScore
             });
             // route to review round
             history.push(`/review/${round}/${course}`)
-        }
-       
     }
     // call useEffect to grab the current course and any hole notes for this user and for this hole from state immediately upon render
     useEffect(() => {
