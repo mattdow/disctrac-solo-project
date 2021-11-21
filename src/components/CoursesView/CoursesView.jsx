@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
+import CourseItem from '../CourseItem/CourseItem';
 
 
 // define a function for the component
@@ -24,23 +25,16 @@ function CoursesView(){
         <Typography
             sx = {{m:2}}
             variant = 'h2'>Your Courses</Typography>
-            <ul>
-                {courses.map(course => {
-                    return (
-                        <li>{course.course_name} {course.total_holes } {course.total_par}</li>
-                    )
-            })}
-            </ul>
             
-        {/* <Grid container className="rounds-list">
-            {courses.map(round => {
+        <Grid container className="courses-list">
+            {courses.map(course => {
                 return (
-                    <Grid key={round.id} item xs={12} lg={12}>
-                        <RoundItem  round={round} />
+                    <Grid key={course.id} item xs={12} lg={12}>
+                        <CourseItem  course={course} />
                     </Grid>
                 )
             })}
-        </Grid> */}
+        </Grid>
         </>
         
     )
