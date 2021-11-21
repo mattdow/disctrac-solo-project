@@ -18,6 +18,31 @@ function CoursesView(){
     useEffect(() => {
         dispatch({ type: 'FETCH_COURSES' });
     }, [dispatch]);
-
+    // JSX render code for the component
+    return (
+        <>
+        <Typography
+            sx = {{m:2}}
+            variant = 'h2'>Your Courses</Typography>
+            <ul>
+                {courses.map(course => {
+                    return (
+                        <li>{course.course_name} {course.total_holes } {course.total_par}</li>
+                    )
+            })}
+            </ul>
+            
+        {/* <Grid container className="rounds-list">
+            {courses.map(round => {
+                return (
+                    <Grid key={round.id} item xs={12} lg={12}>
+                        <RoundItem  round={round} />
+                    </Grid>
+                )
+            })}
+        </Grid> */}
+        </>
+        
+    )
 }
-export default CoursesView
+export default CoursesView;
