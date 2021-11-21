@@ -7,8 +7,11 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 router.get('/', (req, res) => {
     console.log('Course list GET request');
-    let query = `SELECT course_name, COUNT(holes.id)      AS     total_holes, SUM(holes.par_score) AS total_par 
-        FROM courses JOIN holes ON courses.id = holes.course_id GROUP BY course_name`;
+    let query = `SELECT courses.id, course_name, 
+            COUNT(holes.id) AS total_holes, 
+            SUM(holes.par_score) AS total_par 
+            FROM courses JOIN holes ON courses.id = holes.course_id 
+            GROUP BY courses.id, courses.course_name;`;
     pool.query(query).then( result => {
         res.send(result.rows);
     }).catch(err => {

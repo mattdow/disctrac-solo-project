@@ -24,7 +24,7 @@ function CoursesView(){
         <>
         <Typography
             sx = {{m:2}}
-            variant = 'h2'>Your Courses</Typography>
+            variant = 'h2'>Courses</Typography>
             
         <Grid container className="courses-list">
             {courses.map(course => {
