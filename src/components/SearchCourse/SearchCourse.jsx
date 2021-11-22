@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Paper, Grid, TextField, Typography } from '@mui/material';
+import { Button, Paper, Grid, TextField, Typography } from '@mui/material';
 
 
 function SearchCourse() {
@@ -18,6 +18,12 @@ function SearchCourse() {
 
     const [searchTerm, setSearchTerm] = useState('');
 
+    function submitSearch() {
+        console.log('In submit search for term: ', searchTerm);
+        dispatch( {type: 'FETCH_COURSE_SEARCH', payload: {
+            name: searchTerm
+        }});
+    }
     return (
         <Paper>
             <Typography variant="h3">Search Courses</Typography>
@@ -26,6 +32,10 @@ function SearchCourse() {
                 value={searchTerm}
                 label="Enter Part of Course Name"
             />
+            <Button
+                onClick={submitSearch}>
+                Search
+            </Button>
         </Paper>
 
     )

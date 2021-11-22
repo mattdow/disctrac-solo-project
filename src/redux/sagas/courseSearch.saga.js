@@ -4,7 +4,9 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* fetchCourseSearch(action) {
     // GET the DGCR course search results based on the name entered
     try {
-        const response = yield axios.get(`coursesearch`, action.payload);
+        console.log('In fetchCourseSearch with action: ', action);
+        
+        const response = yield axios.get(`/api/coursesearch/${action.payload.name}`);
         yield console.log('New DGCR course search response: ', response.data); 
         yield put ({ type: 'SET_COURSE_SEARCH_RESULTS', payload: response.data });   
     } catch(err) {
