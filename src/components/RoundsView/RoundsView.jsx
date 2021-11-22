@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
 import RoundItem from '../RoundItem/RoundItem';
 
 
@@ -19,11 +19,18 @@ function RoundsView() {
         dispatch({ type: 'FETCH_ROUNDS' });
     }, [dispatch]);
 
+    // define a function to link to courses view
+    
+
     return (
         <>
         <Typography
             sx = {{m:2}}
-            variant = 'h2'>Your Rounds</Typography>
+            variant = 'h4'>Your Rounds</Typography>
+        <Button variant="outlined"
+                onClick={() => history.push('/courses')}>
+            View Courses
+        </Button>
         <Grid container className="rounds-list">
             {rounds.map(round => {
                 return (
