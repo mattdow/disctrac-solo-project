@@ -12,10 +12,8 @@ function SearchCourse() {
     // grab the array of search results from Redux
 
     const searchResults = useSelector(store => store.SearchCourse);
-    // call useEffect hook to populate searchResults with results
-    useEffect(() => {
-    }, [])
-
+    
+    
     const [searchTerm, setSearchTerm] = useState('');
 
     function submitSearch() {
@@ -24,8 +22,13 @@ function SearchCourse() {
             name: searchTerm
         }});
     }
-
     console.log('Course search results: ', searchResults);
+    // call useEffect hook to populate searchResults with results
+    // useEffect(() => {
+    //     // dispatch( {type: 'FETCH_COURSE_SEARCH', payload: {
+    //     //     name: searchTerm
+    //     // }});
+    // }, [dispatch])
     return (
         <Paper>
             <Typography variant="h3">Search Courses</Typography>
@@ -35,9 +38,14 @@ function SearchCourse() {
                 label="Enter Part of Course Name"
             />
             <Button
-                onClick={submitSearch}>
+                onClick={(event) => {dispatch( {type: 'FETCH_COURSE_SEARCH', payload: {
+                    name: searchTerm
+                }})}}>
                 Search
             </Button>
+            <Typography>
+                {JSON.stringify(searchResults)}
+            </Typography>
         </Paper>
 
     )
