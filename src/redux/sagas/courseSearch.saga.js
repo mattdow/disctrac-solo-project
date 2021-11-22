@@ -15,14 +15,6 @@ function* fetchCourseSearch(action) {
     }
 }
 
-
-
-
-
-
-
-
-
 function* courseSearchSaga() {
     // watching for a course search action
     yield takeLatest('FETCH_COURSE_SEARCH', fetchCourseSearch);

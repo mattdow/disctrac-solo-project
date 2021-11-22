@@ -24,6 +24,8 @@ function SearchCourse() {
             name: searchTerm
         }});
     }
+
+    console.log('Course search results: ', searchResults);
     return (
         <Paper>
             <Typography variant="h3">Search Courses</Typography>
