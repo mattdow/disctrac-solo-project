@@ -1,0 +1,28 @@
+import axios from 'axios';
+import { put, takeLatest } from 'redux-saga/effects';
+
+function* fetchCourseSearch(action) {
+    // GET the DGCR course search results based on the name entered
+    try {
+        const response = yield axios.get(`coursesearch`, action.payload);
+        yield console.log('New DGCR course search response: ', response.data);    
+    } catch(err) {
+        yield put({ type: 'COURSE_SEARCH_ERROR'});
+        console.log('Error in fetchCourseSearch', err);
+    }
+}
+
+
+
+
+
+
+
+
+
+function* courseSearchSaga() {
+    // watching for a course search action
+    yield takeLatest('FETCH_COURSE_SEARCH', fetchCourseSearch);
+}
+
+export default courseSearchSaga;
