@@ -31,7 +31,7 @@ function RoundItem({ round }) {
     // define a function for actions to run when a round is clicked
     const addRound = (courseID) => {
         console.log('In addRound for', courseID);
-        // call the active round reducer to add the course and user info to the active round object
+        // call the active round action to post a new round to the database and add the course and user info to the active round object
         dispatch({type: 'START_NEW_ROUND', payload: {
             user: user.id, course: courseID
         }})

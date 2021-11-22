@@ -25,11 +25,11 @@ function Nav() {
         {user.id && (
           <>
             <Link className="navLink" to="/rounds">
-              Home
+              Rounds
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/courses">
+              Courses
             </Link>
 
             <LogOutButton className="navLink" />
