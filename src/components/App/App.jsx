@@ -24,6 +24,7 @@ import HoleScoreView from '../HoleScoreView/HoleScoreView';
 import ReviewRoundView from '../ReviewRound/ReviewRound';
 import EditScoreView from '../EditScoreView/EditScoreView';
 import CoursesView from '../CoursesView/CoursesView';
+import SearchCourse from '../SearchCourse/SearchCourse';
 
 import './App.css';
 
@@ -80,6 +81,10 @@ function App() {
           <ProtectedRoute
             exact path='/courses'
             children={<CoursesView />} />
+
+          <ProtectedRoute
+            exact path='/searchcourses'
+            children={<SearchCourse />} />
 
 
           <Route

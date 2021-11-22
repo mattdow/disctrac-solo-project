@@ -9,15 +9,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('DGCR req.body: ', req.body);
     console.log('Signature is: ', process.env.FIND_NAME_SIGNATURE);
     console.log('API key is: ', process.env.DGCR_API_KEY);
-    
-    
-    
-    axios.get(`http://www.dgcoursereview.com/api_test/?key=${process.env.DGCR_API_KEY}&sig=${process.env.FIND_NAME_SIGNATURE}&mode=findname$name=${req.body.name}`)
+    axios.get(`http://www.dgcoursereview.com/api_test/?key=${process.env.DGCR_API_KEY}&sig=${process.env.FIND_NAME_SIGNATURE}&mode=findname&name=${req.body.name}`)
     .then((response) => {
-        console.log('response is', response);
-        res.send(response.rows);
+        console.log('response is', response.data);
+        res.send(response.data);
     }).catch((error) => {
-        console.log('Error in DCGR course name search', error);
+        console.log('Error in DGCR course name search', error);
     })
 });
 

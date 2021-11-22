@@ -5,7 +5,8 @@ function* fetchCourseSearch(action) {
     // GET the DGCR course search results based on the name entered
     try {
         const response = yield axios.get(`coursesearch`, action.payload);
-        yield console.log('New DGCR course search response: ', response.data);    
+        yield console.log('New DGCR course search response: ', response.data); 
+        yield put ({ type: 'SET_COURSE_SEARCH_RESULTS', payload: response.data });   
     } catch(err) {
         yield put({ type: 'COURSE_SEARCH_ERROR'});
         console.log('Error in fetchCourseSearch', err);
