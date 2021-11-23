@@ -25,6 +25,7 @@ import ReviewRoundView from '../ReviewRound/ReviewRound';
 import EditScoreView from '../EditScoreView/EditScoreView';
 import CoursesView from '../CoursesView/CoursesView';
 import SearchCourse from '../SearchCourse/SearchCourse';
+import SearchCourseList from '../SearchCourseList/SearchCourseList';
 
 import './App.css';
 
@@ -85,6 +86,10 @@ function App() {
           <ProtectedRoute
             exact path='/searchcourses'
             children={<SearchCourse />} />
+
+          <ProtectedRoute
+            exact path='/search_results/:searchTerm?'
+            children={<SearchCourseList />} />
 
 
           <Route

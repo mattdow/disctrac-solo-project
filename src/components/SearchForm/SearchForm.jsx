@@ -1,41 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, Paper, Grid, TextField, Typography } from '@mui/material';
-import SearchForm from '../SearchForm/SearchForm';
-import SearchCourseList from '../SearchCourseList/SearchCourseList';
 
-
-function SearchCourse() {
+function SearchForm() {
     // set dispatch hook as a variable for use
     const dispatch = useDispatch();
-    // set history hook as a variable for use
+     // set history hook as a variable for use
     const history = useHistory();
-    // grab the array of search results from Redux
-
-    // const searchResults = useSelector(store => store.SearchCourse);
-        
+    // set local state for a search term
     const [searchTerm, setSearchTerm] = useState('');
-
+    // define a function to fetch search results on submission
     function submitSearch() {
         console.log('In submit search for term: ', searchTerm);
-        // searchResults = axios.get(`/api/coursesearch/${searchTerm}`);
-        // dispatch( {type: 'FETCH_COURSE_SEARCH', payload: {
-        //     name: searchTerm
-        // }});
-        history.push(`/search_results/${searchTerm}`);
-    }
-
-    // call useEffect hook to populate searchResults with results
-     useEffect(() => {
         dispatch( {type: 'FETCH_COURSE_SEARCH', payload: {
             name: searchTerm
         }});
-    }, [dispatch])//
+        history.push('/search_results');
+    }
+
+
     return (
-        <>
-            <Paper>
+        <Paper>
             <Typography variant="h3">Search Courses</Typography>
             <TextField
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -46,10 +32,9 @@ function SearchCourse() {
                 onClick={submitSearch}>
                 Search
             </Button> 
-            </Paper>
-            {/* <SearchForm /> */}
-        </>
-
+        </Paper>
+        
     )
-} // end of SearchCourse
-export default SearchCourse;
+}
+
+export default SearchForm;
