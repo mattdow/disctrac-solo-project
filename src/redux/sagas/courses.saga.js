@@ -16,6 +16,7 @@ function* fetchCourses() {
 function* postNewCourse(action) {
     try {
         const response = yield axios.post('/api/courses', action.payload);
+        yield put({ type: 'ADD_COURSE_HOLES'})
     } catch(err) {
         yield put({ type: 'ADD_NEW_COURSE_ERROR'});
         console.log('Error in postNewCourse', err);

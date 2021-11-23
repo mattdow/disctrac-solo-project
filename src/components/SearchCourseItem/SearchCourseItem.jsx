@@ -8,10 +8,13 @@ import { typography } from '@mui/system';
 // creating a course component for each individual course search result for ease of selecting and styling
 // pass in the particular course from the SearchCourseList array map
 function SearchCourseItem({ result }) {
+    // define the useDispatch hook as a variable
+    const dispatch = useDispatch();
     
     // define a function for actions to run when a course is clicked
     const addCourse = () => {
         console.log('In addCourse for DGCR ID:', result.course_id);
+        dispatch({ type: 'ADD_NEW_COURSE', payload: result});
     }
 
 
