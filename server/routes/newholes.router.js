@@ -8,7 +8,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.post('/:courseID', async (req, res) => {
     const courseID = req.params.courseID;
     const holeInfo = req.body;
-    console.log('In newholes router, courseID: ', courseID);
+    console.log('In newholes router, courseID and holeInfo ', courseID, holeInfo);
     
     // create the same connection for all queries
     const connection = await pool.connect();

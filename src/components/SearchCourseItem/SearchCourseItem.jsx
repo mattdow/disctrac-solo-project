@@ -10,14 +10,15 @@ import { typography } from '@mui/system';
 function SearchCourseItem({ result }) {
     // define the useDispatch hook as a variable
     const dispatch = useDispatch();
+    // define the useHistory hook as a variable
+    const history = useHistory();
     
     // define a function for actions to run when a course is clicked
     const addCourse = () => {
         console.log('In addCourse for DGCR ID:', result.course_id);
         dispatch({ type: 'ADD_NEW_COURSE', payload: result});
+        // history.push('/courses');
     }
-
-
 
     // return JSX rendering material
     return (
