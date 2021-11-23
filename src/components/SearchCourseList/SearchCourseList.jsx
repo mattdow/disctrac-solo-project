@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Box, Button, Paper, Grid, TextField, Typography } from '@mui/material';
+import SearchCourseItem from '../SearchCourseItem/SearchCourseItem';
 
 function SearchCourseList() {
     // set dispatch hook as a variable for use
@@ -26,16 +27,11 @@ function SearchCourseList() {
             { 
                 searchResults?.map((result) => {
                     console.log('In map of search results', result);
-                    return <Typography key={result.course_id}>
-                        {result.name}
-                    </Typography>
+                    return <SearchCourseItem key={result.course_id}     result = {result} />
+    
                 })}
-
-
         </Box>
     )
-
-
 }
 
 export default SearchCourseList;
