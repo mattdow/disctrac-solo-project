@@ -39,4 +39,25 @@ router.get('/:id', (req, res) => {
             res.sendStatus(500);
         })
 })
+
+// Post a new course from a user selection and return the new course ID
+router.post('/', (req, res) => {
+    console.log('New course POST request', req.body);
+    const addCourseQuery = `
+        INSERT INTO courses ("course_name")
+        VALUES ($1)
+        RETURNING "id";`;
+    const values = [req.body.name];
+    // query the DB to create the new course
+    pool.query(addCourseQuery, values)
+    .then(result => {
+        //make sure we get an ID as a result
+        console.log('New Course ID: ', result.rows[0].id);
+        const newCourseID = result.rows[0].id;
+        res.send({course_id: newCourseID});
+    }).catch(err => {
+        console.log('Error adding new course', err);
+        res.sendStatus(500);
+    })
+})
 module.exports = router;

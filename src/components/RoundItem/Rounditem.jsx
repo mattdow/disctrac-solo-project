@@ -42,7 +42,7 @@ function RoundItem({ round }) {
         // route to a review round view for the round and course ID corresponding to the clicked card
         history.push(`review/${round.id}/${round.courseid}`)
     }
-
+    // return JSX rendering material
     return (
         <Card variant="outlined" sx={{my:2}}>
             <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
@@ -68,7 +68,7 @@ function RoundItem({ round }) {
                 </IconButton>
                 <Button size="large" 
                         variant="outlined"
-                        onClick={() => addRound(round.courseid)}>PLAY AGAIN</Button>
+                        onClick={() => addRound(round.courseid)}>ADD COURSE</Button>
                 <DeleteModal round={round}/>
             </CardActions>
         </Card>

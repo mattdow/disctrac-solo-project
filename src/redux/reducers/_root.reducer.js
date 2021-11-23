@@ -9,6 +9,7 @@ import holeScore from './holeScore.reducer';
 import holeNote from './holeNote.reducer';
 import selectedHS from './selectedHS.reducer';
 import currentHole from './currentHole.reducer';
+import courseSearch from './courseSearch.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   holeNote, // array of hole notes from same user and hole
   selectedHS, // object of selected hole score
   currentHole, // object of current hole
+  courseSearch, // list of search matches for name input
 });
 
 export default rootReducer;

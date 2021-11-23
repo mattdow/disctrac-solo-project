@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 // creating a post route to create a new round
 router.post('/', (req, res) => {
     console.log(req.body);
-    // RETURNING "id" gives us back the id of the created movie
+    // RETURNING "id" gives us back the id of the created round
     const startRoundQuery = `
     INSERT INTO rounds ("user_id", "course_id", "date_played")
     VALUES ($1, $2, CURRENT_DATE)
