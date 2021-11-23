@@ -14,7 +14,8 @@ const coursesRouter = require('./routes/courses.router');
 const holeScoresRouter = require('./routes/holescores.router');
 const selectedHSRouter = require('./routes/selectedHS.router');
 const currentHoleRouter = require('./routes/hole.router');
-const courseSearchRouter = require('./routes/coursesearch.router')
+const courseSearchRouter = require('./routes/coursesearch.router');
+const newCourseRouter = require('./routes/newcourse.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -35,6 +36,7 @@ app.use('/api/holescores', holeScoresRouter);
 app.use('/api/selectedhole', selectedHSRouter);
 app.use('/api/hole', currentHoleRouter);
 app.use('/api/coursesearch', courseSearchRouter);
+app.use('/api/newcourse', newCourseRouter)
 
 
 // Serve static files
