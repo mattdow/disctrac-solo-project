@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('../modules/pool');
+const pool = require('../modules/pool.js');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
@@ -23,6 +23,7 @@ router.post('/:courseID', async (req, res) => {
             
             await connection.query( sqlText, [courseID, holeInfo[i].hole_num, holeInfo[i].tee_1_par, holeInfo[i].tee_1_len]);
         } // end of for loop
+        await connection.query('COMMIT');
         res.sendStatus(200);
     } catch (error) {
         await connection.query('ROLLBACK');
