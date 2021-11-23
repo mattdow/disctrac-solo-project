@@ -15,8 +15,24 @@ function* fetchCourses() {
 
 function* postNewCourse(action) {
     try {
+        console.log('In postNewCourse');
+        
         const response = yield axios.post('/api/courses', action.payload);
-        yield put({ type: 'ADD_COURSE_HOLES'})
+        // define an object that is a combination of the new course and the hole information from payload
+        // remove the course info from action.payload, leaving only hole info
+        console.log('postNewCourse saga, response is:', response);
+        const courseHoleInfo = yield axios.get(`/api/newcourse/${action.payload.course_id}`);
+        console.log('postNewCourse saga, courseHoleInfo is: ', courseHoleInfo);
+        yield axios.post(`/api/newholes/${response.data.course_id}`, courseholeInfo.data);
+        // let courseHoleInfo = action.payload;
+        // courseHoleInfo.shift();
+        // let courseIDandHoles = {...response, ...courseHoleInfo};
+        // console.log('Object sent to ADD COURSE HOLES is:', courseIDandHoles);
+        // for (let hole of courseHoleInfo) {
+        //     let courseIDplusHole = {...response, ...hole};
+        //     console.log('courseIDplusHole is:', courseIDplusHole);
+        //     yield put({ type: 'ADD_NEW_HOLE', payload: courseIDplusHole })
+        // } // end of for loop
     } catch(err) {
         yield put({ type: 'ADD_NEW_COURSE_ERROR'});
         console.log('Error in postNewCourse', err);

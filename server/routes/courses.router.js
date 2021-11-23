@@ -42,12 +42,12 @@ router.get('/:id', (req, res) => {
 
 // Post a new course from a user selection and return the new course ID
 router.post('/', (req, res) => {
-    console.log('New course POST request', req.body[0]);
+    console.log('New course POST request', req.body);
     const addCourseQuery = `
         INSERT INTO courses ("course_name")
         VALUES ($1)
         RETURNING "id";`;
-    const values = [req.body[0].name];
+    const values = [req.body.name];
     // query the DB to create the new course
     pool.query(addCourseQuery, values)
     .then(result => {
