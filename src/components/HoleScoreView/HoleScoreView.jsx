@@ -29,7 +29,7 @@ function HoleScoreView() {
     // set a local state for the new hole information
     let [newScore, setNewScore] = useState(activeHole.par_score);
     let [newNote, setNewNote] = useState('');    
-    // define decreaseScore to decrement
+    // define decreaseScore to decrement 
     const decreaseScore = (event) => {
         return setNewScore(newScore - 1);
     } 

@@ -68,7 +68,7 @@ function RoundItem({ round }) {
                 </IconButton>
                 <Button size="large" 
                         variant="outlined"
-                        onClick={() => addRound(round.courseid)}>ADD COURSE</Button>
+                        onClick={() => addRound(round.courseid)}>START NEW ROUND</Button>
                 <DeleteModal round={round}/>
             </CardActions>
         </Card>

@@ -66,7 +66,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
-// PUT a new hole score
+// PUT a previous hole score
 router.put('/', rejectUnauthenticated, (req,res) => {
     console.log('CHANGE new HoleScore:', req.body);
     // define the SQL query to change the hole score
