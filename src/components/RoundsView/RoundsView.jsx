@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Grid, Typography, Button } from '@mui/material';
 import RoundItem from '../RoundItem/RoundItem';
@@ -26,7 +26,8 @@ function RoundsView() {
         <>
         <Typography
             sx = {{m:2}}
-            variant = 'h4'>Your Rounds</Typography>
+            variant = 'h4'>Your Rounds
+        </Typography>
         <Button variant="outlined"
                 onClick={() => history.push('/courses')}>
             View Courses

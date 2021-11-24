@@ -26,6 +26,7 @@ import EditScoreView from '../EditScoreView/EditScoreView';
 import CoursesView from '../CoursesView/CoursesView';
 import SearchCourse from '../SearchCourse/SearchCourse';
 import SearchCourseList from '../SearchCourseList/SearchCourseList';
+import ProfilePage from '../ProfilePage/ProfilePage';
 
 import './App.css';
 
@@ -90,6 +91,10 @@ function App() {
           <ProtectedRoute
             exact path='/search_results/:searchTerm?'
             children={<SearchCourseList />} />
+
+          <ProtectedRoute
+            exact path = '/profile/:userID?'
+            children = {<ProfilePage />} />
 
 
           <Route
