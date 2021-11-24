@@ -19,7 +19,8 @@ function ProfilePage() {
         <Box>
             <Typography
                 sx = {{m:2}}
-                variant = 'h4'>Your Profile
+                variant = 'h4'>
+                Your Profile
             </Typography>
             <Typography
                 sx = {{m:2}}
