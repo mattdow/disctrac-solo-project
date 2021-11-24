@@ -19,6 +19,9 @@ function SearchCourse() {
         <>
             <Paper>
             <Typography variant="h3">Search Courses</Typography>
+            <Typography variant="h6">
+                From dgcoursereview.com
+            </Typography>
             <TextField
                 onChange={(e) => setSearchTerm(e.target.value)}
                 value={searchTerm}

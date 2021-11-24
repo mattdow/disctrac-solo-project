@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
 import CourseItem from '../CourseItem/CourseItem';
 
 
@@ -25,6 +25,13 @@ function CoursesView(){
         <Typography
             sx = {{m:2}}
             variant = 'h2'>Courses</Typography>
+
+        <Button 
+            onClick = {() => history.push('/searchcourses')}
+            variant = "outlined"
+            >
+                Search for a Course
+        </Button>
             
         <Grid container className="courses-list">
             {courses.map(course => {

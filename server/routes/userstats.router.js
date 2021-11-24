@@ -7,7 +7,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/rounds', rejectUnauthenticated, (req, res) => {
     console.log('In get route for total user rounds', req.user.id);
     // define DB query text to extract total rounds played for user
-    const queryText = `SELECT user_id, COUNT(rounds.id) AS total_rounds
+    const queryText = `SELECT user_id, COUNT(rounds.id) AS total_rounds,
+                    COUNT(DISTINCT rounds.course_id) AS total_courses
                     FROM rounds
                     WHERE user_id = $1
                     GROUP BY user_id;`;
