@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import ScatterChart from '../ScatterChart/ScatterChart';
+import BarChart from '../BarChart/BarChart';
 
 function ProfilePage() {
     // get the user's info from the store
@@ -14,10 +16,23 @@ function ProfilePage() {
 
     // JSX code to render to the DOM
     return (
-        <Typography
-            sx = {{m:2}}
-            variant = 'h4'>Your Profile
-        </Typography>
+        <Box>
+            <Typography
+                sx = {{m:2}}
+                variant = 'h4'>Your Profile
+            </Typography>
+            <Typography
+                sx = {{m:2}}
+                variant = 'body1'>
+                Welcome, {user.username}
+            </Typography>
+    
+            <BarChart />
+            <ScatterChart />
+
+
+        </Box>
+        
     )
 }
 export default ProfilePage;
