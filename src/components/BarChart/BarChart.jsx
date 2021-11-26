@@ -63,8 +63,8 @@ function BarChart() {
         <Box sx={{display: flexbox}}>
             <Bar
                 data={chartData}
-                
                 options={chartOptions}
+                height={300}
             />
         </Box>
     )
