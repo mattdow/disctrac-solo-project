@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
+import { Box, Paper } from '@mui/material';
+import { flexbox } from '@mui/system';
 
 function BarChart() {
-
+    // get the user's info from the store
+    const user = useSelector((store) => store.user);
+    //set dispatch hook as a variable for use
+    const dispatch = useDispatch();
+    // grab user hole score data for the chart from Redux store
+    const userHoleScores = useSelector(store => store.userHoleScores);
+    console.log('userHoleScores are:', userHoleScores);
+    // define a variable mapping the scores_to_par as labels
+    const scoreLabels = userHoleScores.map((score) => {
+        if (score.scores_to_par <= -2) {
+            return 'Eagle or Better';
+        } else if (score.scores_to_par === -1) {
+            return 'Birdie';
+        } else if (score.scores_to_par === 0) {
+            return 'Par';
+        } else if (score.scores_to_par === 1) {
+            return 'Bogey';
+        } else if (score.scores_to_par === 2) {
+            return 'Double Bogey';
+        } else return 'Worse';
+    });
+    console.log('scoreLabels are: ', scoreLabels);
+    // define a variable extracting the score data via array map
+    const scoreData = userHoleScores.map(score => Number(score.count));
+    console.log('scoreData is:', scoreData);
     const chartData = {
-        labels: ['Eagles', 'Birdies', 'Pars', 'Bogies', 'Worse'],
+        labels: scoreLabels,
         datasets: [{
-            label: '2020 Hole Scores',
-            data: [1, 5, 26, 13, 8],
-            backgroundColor: ['Blue']
-        },
-        {
-            label: '2021 Hole Scores',
-            data: [2, 16, 46, 17, 4],
-            backgroundColor: ['Orange']
-
+            label: 'All Courses',
+            data: scoreData,
+            backgroundColor: ['#A6D1F2']
         }]
     }
     const chartOptions = {
@@ -33,15 +54,19 @@ function BarChart() {
         maintainAspectRatio: false,
         indexAxis: 'y',
     }
+    useEffect(() => {
+        dispatch({ type: 'FETCH_USER_HOLE_SCORES'});
+    }, [dispatch])
+
+    // JSX code to render the chart to the DOM
     return (
-        <div>
+        <Box sx={{display: flexbox}}>
             <Bar
                 data={chartData}
-                height={400}
-                width={600}
+                
                 options={chartOptions}
             />
-        </div>
+        </Box>
     )
 }
 

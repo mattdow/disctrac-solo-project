@@ -13,10 +13,23 @@ function* fetchUserSummary(action) {
         console.log('Error in fetchTotalRounds');
     }
 }
+// generator function to fetch the count of the user's hole scores grouped by score in relation to par
+function* fetchUserHoleScores(action) {
+    console.log('In fetchUserHoleScores');
+    try { 
+        const response = yield axios.get(`/api/userstats/holescores`);
+        yield console.log('User holescore GET response:', response);
+        yield put({ type: 'SET_USER_HOLE_SCORES', payload: response.data }); 
+    } catch (err) {
+        yield put({ type: 'FETCH_USER_HOLESCORE_ERROR'});
+        console.log('Error in fetchUserHoleScores');        
+    }    
+}
 
 function* userStatsSaga() {
 
     yield takeLatest('FETCH_USER_SUMMARY', fetchUserSummary);
+    yield takeLatest('FETCH_USER_HOLE_SCORES', fetchUserHoleScores);
 }
 
 export default userStatsSaga;
