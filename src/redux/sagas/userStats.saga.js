@@ -17,6 +17,7 @@ function* fetchUserSummary(action) {
 function* userStatsSaga() {
 
     yield takeLatest('FETCH_USER_SUMMARY', fetchUserSummary);
+    yield takeLatest('FETCH_USER_HOLE_SCORES', fetchUserHoleScores);
 }
 
 export default userStatsSaga;
