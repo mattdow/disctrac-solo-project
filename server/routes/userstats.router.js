@@ -15,8 +15,8 @@ router.get('/rounds', rejectUnauthenticated, (req, res) => {
     
     pool.query(queryText, [req.user.id])
         .then(response => {
-            console.log('User rounds router response:', response.rows);
-            res.send(response.rows);
+            console.log('User rounds router response:', response.rows[0]);
+            res.send(response.rows[0]);
         }).catch(err => {
             console.log('Error on user rounds', err);
             res.sendStatus(500);

@@ -9,4 +9,4 @@ const holeScoreReducer = (state = [], action) => {
     }
 }
 
-export default holeScoreReducer
+export default holeScoreReducer;

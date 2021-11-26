@@ -12,8 +12,16 @@ function ProfilePage() {
     const dispatch = useDispatch();
     // set history hook as a variable for use
     const history = useHistory();
+    // grab user summary stats from store
+    const userStats = useSelector(store => store.userStats);
+
+    console.log('User summary stats are: ', userStats);
 
 
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_USER_SUMMARY' });
+    }, [dispatch])
     // JSX code to render to the DOM
     return (
         <Box>
@@ -27,7 +35,16 @@ function ProfilePage() {
                 variant = 'body1'>
                 Welcome, {user.username}
             </Typography>
-    
+            <Typography
+                sx = {{m:2}}
+                variant = 'body1'>
+                Total Rounds Played: {userStats.total_rounds}
+            </Typography>
+            <Typography
+                sx = {{m:2}}
+                variant = 'body1'>
+                Total Courses Played: {userStats.total_courses}
+            </Typography>
             <BarChart />
             <ScatterChart />
 
