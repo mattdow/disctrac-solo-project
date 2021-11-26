@@ -12,6 +12,7 @@ import currentHole from './currentHole.reducer';
 import courseSearch from './courseSearch.reducer';
 import userStats from './userStats.reducer';
 import userHoleScores from './userHoleScores.reducer';
+import userRoundScores from './userRoundScores.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   courseSearch, // list of search matches for name input
   userStats, // summary stats for the user
   userHoleScores, // user's bar chart data
+  userRoundScores, // user's round scatter chart data
 });
 
 export default rootReducer;

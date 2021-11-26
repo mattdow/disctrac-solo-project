@@ -48,7 +48,7 @@ router.get('/roundscores/', rejectUnauthenticated, (req, res) => {
     console.log('In GET route for user round scores', req.user.id);
     // define DB query text to extract total round scores
     const queryText = `
-        SELECT rounds.id, rounds.date_played, 
+        SELECT rounds.id, rounds.date_played::date, 
         SUM(hole_scores.score - holes.par_score) AS total_score_to_par
         FROM hole_scores JOIN rounds ON rounds.id = hole_scores.round_id
         JOIN holes ON holes.id = hole_scores.hole_id
