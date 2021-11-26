@@ -25,11 +25,22 @@ function* fetchUserHoleScores(action) {
         console.log('Error in fetchUserHoleScores');        
     }    
 }
+//generator function to fetch the total round scores for the user
+function* fetchUserRoundScores(action) {
+    console.log('In fetchUserRoundScores');
+    try {
+        const response = yield axios.get(`/api/userstats/roundscores`);
+        yield put ({ type: 'SET_USER_ROUND_SCORES', payload: response.data });
+    } catch (err) {
+        yield put({ type: 'FETCH_USER_ROUND_SCORES_ERROR'});
+    }    
+}
 
 function* userStatsSaga() {
 
     yield takeLatest('FETCH_USER_SUMMARY', fetchUserSummary);
     yield takeLatest('FETCH_USER_HOLE_SCORES', fetchUserHoleScores);
+    yield takeLatest('FETCH_USER_ROUND_SCORES', fetchUserRoundScores);
 }
 
 export default userStatsSaga;

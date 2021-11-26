@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
 import { Box, Paper } from '@mui/material';
-import { flexbox } from '@mui/system';
+
 
 function BarChart() {
     // get the user's info from the store
@@ -54,13 +54,14 @@ function BarChart() {
         maintainAspectRatio: false,
         indexAxis: 'y',
     }
+    // call useEffect to fetch the user hole scores upon load
     useEffect(() => {
         dispatch({ type: 'FETCH_USER_HOLE_SCORES'});
     }, [dispatch])
 
     // JSX code to render the chart to the DOM
     return (
-        <Box sx={{display: flexbox}}>
+        <Box sx={{m:2, display: 'flex'}}>
             <Bar
                 data={chartData}
                 options={chartOptions}

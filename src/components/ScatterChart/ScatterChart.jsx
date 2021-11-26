@@ -1,37 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Paper } from '@mui/material';
 import { Scatter, Chart }  from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 
 function ScatterChart () {
+    // set dispatch hook as a variable for use
+    const dispatch = useDispatch();
+    // grab user round score data for the chart from Redux
+    const userRoundScores = useSelector(store => store.userRoundScores);
+    
+    // map the userRoundScores to a different array of objects for the chart
+    const scoreData = userRoundScores.map((score) => {
+        return {
+            // Date from SQL needs to be truncated
+            x: score.date_played.substring(0, 10),
+            // score from SQL is a string, need to convert
+            y: Number(score.total_score_to_par)
+        }
+    });
+    console.log('User scoreData is:', scoreData);
     const chartData = {
         datasets: [
             {
-                label: '2021 Round Scores',
-                data: [
-                    { x: '2021-03-26', y: 5},
-                    { x: '2021-04-03', y: 8},
-                    { x: '2021-04-16', y: 4},
-                    { x: '2021-05-07', y: 2},
-                    { x: '2021-05-26', y: 6},
-                    { x: '2021-06-06', y: 0},
-                    { x: '2021-06-06', y: 3},
-                    { x: '2021-06-14', y: -2},
-                    { x: '2021-07-01', y: 2},
-                    { x: '2021-07-07', y: 1},
-                    { x: '2021-07-14', y: -1},
-                    { x: '2021-07-20', y: 0},
-                    { x: '2021-07-24', y: -3},
-                    { x: '2021-08-05', y: 1},
-                    { x: '2021-08-12', y: 4},
-                    { x: '2021-08-19', y: -5},
-                    { x: '2021-08-31', y: -2},
-                    { x: '2021-09-08', y: 3},
-                    { x: '2021-09-15', y: -1},
-                    { x: '2021-09-16', y: 1},
-                    { x: '2021-09-23', y: -4},
-                    { x: '2021-10-04', y: 2},
-                    { x: '2021-10-11', y: 0},
-                ],
+                label: 'All courses',
+                data: scoreData,
                 backgroundColor: 'red',
             }
         ]
@@ -60,15 +53,18 @@ function ScatterChart () {
         maintainAspectRatio: false,
         indexAxis: 'y',
     }
+    // call useEffect to fetch the user round scores upon load
+    useEffect(() => {
+        dispatch({ type: 'FETCH_USER_ROUND_SCORES'});
+    }, [dispatch]);
     return (
-        <div>
+        <Box sx={{m:2, display: 'flex'}}>
             <Scatter
                 data={chartData}
-                height={400}
-                width={600}
+                height={300}
                 options={chartOptions}
             />
-        </div>
+        </Box>
     )
 }
 
