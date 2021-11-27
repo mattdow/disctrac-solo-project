@@ -5,6 +5,7 @@ import { Box, Typography, Button } from '@mui/material';
 import ScatterChart from '../ScatterChart/ScatterChart';
 import BarChart from '../BarChart/BarChart';
 import BottomNavBar from '../BottomNavBar/BottomNavBar';
+import LogOutButton from '../LogOutButton/LogOutButton';
 
 function ProfilePage() {
     // get the user's info from the store
@@ -25,27 +26,40 @@ function ProfilePage() {
     }, [dispatch])
     // JSX code to render to the DOM
     return (
-        <Box sx={{ pb: 7 }}>
+        <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
             <Typography
-                sx = {{m:2}}
+                align='center'
+                sx = {{pt:2, mt:0.2}}
                 variant = 'h4'>
                 Your Profile
             </Typography>
-            <Typography
-                sx = {{m:2}}
+            {/* <Typography
+                sx = {{mx:2, my:1}}
                 variant = 'body1'>
                 Welcome, {user.username}
-            </Typography>
-            <Typography
-                sx = {{m:2}}
-                variant = 'body1'>
-                Total Rounds Played: {userStats.total_rounds}
-            </Typography>
-            <Typography
-                sx = {{m:2}}
-                variant = 'body1'>
-                Total Courses Played: {userStats.total_courses}
-            </Typography>
+            </Typography> */}
+            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <Box >
+                    <Typography
+                        sx = {{mx:2, my:1}}
+                        variant = 'body1'>
+                        Total Rounds: {userStats.total_rounds}
+                    </Typography>
+                    <Typography
+                        sx = {{mx:2, my:1}}
+                        variant = 'body1'>
+                        Courses Played: {userStats.total_courses}
+                    </Typography>
+  
+                </Box>
+                <Button
+                    variant="contained"
+                    sx={{mr:2, my:2}}
+                    onClick={() => dispatch({ type: 'LOGOUT' })}>
+                        LOG OUT
+                </Button>
+            </Box>
+            
             <BarChart />
             <ScatterChart />
             <BottomNavBar />

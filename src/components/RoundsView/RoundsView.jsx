@@ -27,7 +27,7 @@ function RoundsView() {
         <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
             <Typography
                 align='center'
-                sx = {{p:2}}
+                sx = {{pt:2, mt:0.2}}
                 variant = 'h4'>Your Rounds
             </Typography>
             {/* <Button variant="outlined"

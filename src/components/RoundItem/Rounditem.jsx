@@ -44,18 +44,21 @@ function RoundItem({ round }) {
     }
     // return JSX rendering material
     return (
-        <Card variant="outlined" sx={{my:2}}>
-            <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <Card variant="outlined" sx={{my:2, mx:0.4, boxShadow: 1, borderRadius: 1}}>
+            <CardContent sx={{display: 'flex', justifyContent: 'center', pb: 0,  }}>
                 <Typography 
-                    variant = "body2">
+                    variant = "body"
+                    fontWeight = "bold">
                     {round.course_name}
                 </Typography>
+            </CardContent>
+            <CardContent sx={{display: 'flex', justifyContent: 'space-between', pt:0}}>   
                 <Typography 
-                    variant = "body2">
+                    variant = "body" sx={{ml:1}}>
                     {convertDate(round.date_played)}
                 </Typography>
                 <Typography 
-                    variant = "body2">
+                    variant = "body" sx={{mr:1}}>
                     {convertScore(round.total_score)}
                 </Typography>
             </CardContent>
@@ -67,7 +70,7 @@ function RoundItem({ round }) {
                     <Edit fontSize="large"/>
                 </IconButton>
                 <Button size="large" 
-                        variant="outlined"
+                        variant="contained"
                         onClick={() => addRound(round.courseid)}>START NEW ROUND</Button>
                 <DeleteModal round={round}/>
             </CardActions>

@@ -58,13 +58,13 @@ function ScatterChart () {
         dispatch({ type: 'FETCH_USER_ROUND_SCORES'});
     }, [dispatch]);
     return (
-        <Box sx={{m:2, display: 'flex'}}>
+        <Paper sx={{m:1, display: 'flex'}}>
             <Scatter
                 data={chartData}
                 height={300}
                 options={chartOptions}
             />
-        </Box>
+        </Paper>
     )
 }
 

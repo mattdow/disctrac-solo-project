@@ -61,13 +61,13 @@ function BarChart() {
 
     // JSX code to render the chart to the DOM
     return (
-        <Box sx={{m:2, display: 'flex'}}>
+        <Paper sx={{m:1, display: 'flex'}}>
             <Bar
                 data={chartData}
                 options={chartOptions}
                 height={300}
             />
-        </Box>
+        </Paper>
     )
 }
 
