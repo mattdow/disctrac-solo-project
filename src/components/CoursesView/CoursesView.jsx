@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Grid, Typography, Button } from '@mui/material';
+import { Grid, Typography, Button, Box } from '@mui/material';
 import CourseItem from '../CourseItem/CourseItem';
+import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 
 // define a function for the component
@@ -21,28 +22,29 @@ function CoursesView(){
     }, [dispatch]);
     // JSX render code for the component
     return (
-        <>
-        <Typography
-            sx = {{m:2}}
-            variant = 'h2'>Courses</Typography>
+        <Box sx={{ pb: 7 }}>
+            <Typography
+                sx = {{m:2}}
+                variant = 'h2'>Courses</Typography>
 
-        <Button 
-            onClick = {() => history.push('/searchcourses')}
-            variant = "outlined"
-            >
-                Search for a Course
-        </Button>
-            
-        <Grid container className="courses-list">
-            {courses.map(course => {
-                return (
-                    <Grid key={course.id} item xs={12} lg={12}>
-                        <CourseItem  course={course} />
-                    </Grid>
-                )
-            })}
-        </Grid>
-        </>
+            <Button 
+                onClick = {() => history.push('/searchcourses')}
+                variant = "outlined"
+                >
+                    Search for a Course
+            </Button>
+                
+            <Grid container className="courses-list">
+                {courses.map(course => {
+                    return (
+                        <Grid key={course.id} item xs={12} lg={12}>
+                            <CourseItem  course={course} />
+                        </Grid>
+                    )
+                })}
+            </Grid>
+            <BottomNavBar />
+        </Box>
         
     )
 }

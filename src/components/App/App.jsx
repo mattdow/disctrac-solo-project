@@ -144,7 +144,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <BottomNavBar />
+        {/* <BottomNavBar /> */}
       </div>
     </Router>
   );
