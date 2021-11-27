@@ -24,15 +24,16 @@ function RoundsView() {
     
 
     return (
-        <Box sx={{ pb: 7 }}>
+        <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
             <Typography
-                sx = {{m:2}}
+                align='center'
+                sx = {{p:2}}
                 variant = 'h4'>Your Rounds
             </Typography>
-            <Button variant="outlined"
+            {/* <Button variant="outlined"
                     onClick={() => history.push('/courses')}>
                 View Courses
-            </Button>
+            </Button> */}
             <Grid container className="rounds-list">
                 {rounds.map(round => {
                     return (
