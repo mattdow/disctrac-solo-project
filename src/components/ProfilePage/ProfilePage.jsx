@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Box, Typography, Button } from '@mui/material';
 import ScatterChart from '../ScatterChart/ScatterChart';
 import BarChart from '../BarChart/BarChart';
+import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 function ProfilePage() {
     // get the user's info from the store
@@ -24,7 +25,7 @@ function ProfilePage() {
     }, [dispatch])
     // JSX code to render to the DOM
     return (
-        <Box>
+        <Box sx={{ pb: 7 }}>
             <Typography
                 sx = {{m:2}}
                 variant = 'h4'>
@@ -47,7 +48,7 @@ function ProfilePage() {
             </Typography>
             <BarChart />
             <ScatterChart />
-
+            <BottomNavBar />
 
         </Box>
         

@@ -45,7 +45,6 @@ function CoursesView(){
             </Grid>
             <BottomNavBar />
         </Box>
-        
     )
 }
 export default CoursesView;
