@@ -32,7 +32,7 @@ function DeleteModal(round) {
                 color="error"
                 onClick={handleClickOpen}
                 >
-            <Delete />
+            <Delete fontSize="large"/>
         </IconButton>
       <Dialog
         open={open}

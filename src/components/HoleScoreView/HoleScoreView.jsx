@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Card, TextField, Typography, Box, Input } from '@mui/material';
+import { Button, Card, TextField, Typography, Box, Input, IconButton } from '@mui/material';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 
 function HoleScoreView() {
@@ -112,12 +114,25 @@ function HoleScoreView() {
                     </Typography>
                 )
                 })}
-            <Box className="score-bar" sx={{display: 'flex', justifyContent:'space-around', my:2}}>
-                <Button onClick={decreaseScore}>-</Button>
-                <Typography variant="h3">
+            <Box className="score-bar" sx={{display: 'flex', justifyContent:'center', my:2}}>
+                <IconButton onClick={decreaseScore}
+                            color="success"
+                            size="large"
+                            aria-label="Decrease Score"
+                >
+                    <RemoveCircleOutlineIcon fontSize="large"/>
+                </IconButton>
+                <Typography variant="h3"
+                            sx={{ mx: 5 }}>
                             {newScore}
                 </Typography>
-                <Button onClick={increaseScore}>+</Button>
+                <IconButton onClick={increaseScore}
+                            color="error"
+                            size="large"
+                            aria-label="Increase Score"
+                >
+                    <AddCircleOutlineIcon fontSize="large"/>
+                </IconButton>
             </Box>
             <TextField 
                 id="outlined-helper-text"

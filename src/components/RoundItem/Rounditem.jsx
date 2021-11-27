@@ -64,7 +64,7 @@ function RoundItem({ round }) {
                         color="secondary"
                         onClick={() => editRound(round)}
                         >
-                    <Edit />
+                    <Edit fontSize="large"/>
                 </IconButton>
                 <Button size="large" 
                         variant="outlined"
