@@ -28,6 +28,7 @@ import SearchCourse from '../SearchCourse/SearchCourse';
 import SearchCourseList from '../SearchCourseList/SearchCourseList';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import BottomNavBar from '../BottomNavBar/BottomNavBar';
+import Banner from '../Banner/Banner';
 
 import './App.css';
 
@@ -43,7 +44,8 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {/* <Nav /> */}
+        <Banner />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
