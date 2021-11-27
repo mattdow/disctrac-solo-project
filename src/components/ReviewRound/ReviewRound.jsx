@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Card, TextField, Typography, Box, Input, Grid } from '@mui/material';
 import HoleScoreItem from '../HoleScoreItem/HoleScoreItem';
+import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 function ReviewRound() {
     // set the round ID equal to what is currently in params
@@ -41,26 +42,27 @@ function ReviewRound() {
         dispatch({ type: 'FETCH_HOLE_SCORES', payload: round });
     }, [])
     return (
-        <>
-        <Typography
-            sx = {{m:2}}
-            variant = 'h4'>Review Your Round</Typography>
-        <Typography
-            sx = {{m:2}}
-            variant = 'h4'>Total Score: {convertedScore} </Typography>
-        <Grid container className="hole-score-list">
-            {holeScores.map(score => {
-                return (
-                    <Grid key={score.id} item xs={12} lg={12}>
-                        <HoleScoreItem  
-                            score={score} 
-                            course={course}
-                            round={round} />
-                    </Grid>
-                )
-            })}
-        </Grid>
-        </>
+        <Box sx={{ pb: 7 }}>
+            <Typography
+                sx = {{m:2}}
+                variant = 'h4'>Review Your Round</Typography>
+            <Typography
+                sx = {{m:2}}
+                variant = 'h4'>Total Score: {convertedScore} </Typography>
+            <Grid container className="hole-score-list">
+                {holeScores.map(score => {
+                    return (
+                        <Grid key={score.id} item xs={12} lg={12}>
+                            <HoleScoreItem  
+                                score={score} 
+                                course={course}
+                                round={round} />
+                        </Grid>
+                    )
+                })}
+            </Grid>
+            <BottomNavBar />
+        </Box>
     )
 
 }
