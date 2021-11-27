@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Box, Button, Paper, Grid, TextField, Typography } from '@mui/material';
 import SearchCourseItem from '../SearchCourseItem/SearchCourseItem';
+import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 function SearchCourseList() {
     // set dispatch hook as a variable for use
@@ -20,7 +21,7 @@ function SearchCourseList() {
     }, [dispatch]);
     console.log('In SearchCourseList, searchTerm is:', searchTerm);
     return (
-        <Box>
+        <Box sx={{ pb: 7 }}>
             <Typography>
                 Search Results
             </Typography>
@@ -30,6 +31,7 @@ function SearchCourseList() {
                     return <SearchCourseItem key={result.course_id}     result = {result} />
     
                 })}
+            <BottomNavBar />
         </Box>
     )
 }

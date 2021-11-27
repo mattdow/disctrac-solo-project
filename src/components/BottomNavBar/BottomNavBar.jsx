@@ -11,8 +11,6 @@ import { ClassNames } from '@emotion/react';
 
 
 function BottomNavBar() {
-    // define a state variable for the navigation bar
-    const [value, setValue] = React.useState(0);
     // define a variable for useHistory hook
     const history = useHistory();
     // add styles to ensure the navbar sticks to the bottom of the page
@@ -21,10 +19,6 @@ function BottomNavBar() {
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
             <BottomNavigation
             showLabels
-            value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
             >
             <BottomNavigationAction label="Rounds" 
                 icon={<RestoreIcon />} 

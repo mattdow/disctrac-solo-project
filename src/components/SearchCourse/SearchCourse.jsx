@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Paper, Grid, TextField, Typography } from '@mui/material';
+import { Button, Paper, Grid, TextField, Typography, Box } from '@mui/material';
+import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 
 
@@ -16,23 +17,24 @@ function SearchCourse() {
     }
 
     return (
-        <>
+        <Box sx={{ pb: 7 }}>
             <Paper>
-            <Typography variant="h3">Search Courses</Typography>
-            <Typography variant="h6">
-                From dgcoursereview.com
-            </Typography>
-            <TextField
-                onChange={(e) => setSearchTerm(e.target.value)}
-                value={searchTerm}
-                label="Enter Part of Course Name"
-            />
-            <Button
-                onClick={submitSearch}>
-                Search
-            </Button> 
+                <Typography variant="h3">Search Courses</Typography>
+                <Typography variant="h6">
+                    From dgcoursereview.com
+                </Typography>
+                <TextField
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    value={searchTerm}
+                    label="Enter Part of Course Name"
+                />
+                <Button
+                    onClick={submitSearch}>
+                    Search
+                </Button> 
             </Paper>
-        </>
+            <BottomNavBar />
+        </Box>
 
     )
 } // end of SearchCourse
