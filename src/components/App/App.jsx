@@ -27,6 +27,7 @@ import CoursesView from '../CoursesView/CoursesView';
 import SearchCourse from '../SearchCourse/SearchCourse';
 import SearchCourseList from '../SearchCourseList/SearchCourseList';
 import ProfilePage from '../ProfilePage/ProfilePage';
+import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 import './App.css';
 
@@ -143,7 +144,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        <BottomNavBar />
       </div>
     </Router>
   );
