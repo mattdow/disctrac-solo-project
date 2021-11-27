@@ -35,7 +35,7 @@ function BarChart() {
         datasets: [{
             label: 'All Courses',
             data: scoreData,
-            backgroundColor: ['#A6D1F2']
+            backgroundColor: ['#A6D1F2', '#78E425', '#E7FF5C', '#FFB347', '#FF4747', '#64453F']
         }]
     }
     const chartOptions = {
