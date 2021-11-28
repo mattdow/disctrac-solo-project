@@ -21,8 +21,11 @@ function SearchCourseList() {
     }, [dispatch]);
     console.log('In SearchCourseList, searchTerm is:', searchTerm);
     return (
-        <Box sx={{ pb: 7 }}>
-            <Typography>
+        <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
+            <Typography
+                align='center'
+                sx = {{pt:2, mt:0.2}}
+                variant = 'h4'>
                 Search Results
             </Typography>
             { 

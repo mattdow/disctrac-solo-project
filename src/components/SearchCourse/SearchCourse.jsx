@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Paper, Grid, TextField, Typography, Box } from '@mui/material';
+import { Button, Paper, Grid, TextField, Typography, Box, FormControl, InputLabel, Input } from '@mui/material';
 import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 
@@ -17,22 +17,33 @@ function SearchCourse() {
     }
 
     return (
-        <Box sx={{ pb: 7 }}>
-            <Paper>
-                <Typography variant="h3">Search Courses</Typography>
-                <Typography variant="h6">
-                    From dgcoursereview.com
-                </Typography>
-                <TextField
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    value={searchTerm}
-                    label="Enter Part of Course Name"
-                />
-                <Button
-                    onClick={submitSearch}>
-                    Search
-                </Button> 
-            </Paper>
+        <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
+            <Box>
+                <Typography 
+                    align = 'center'
+                    sx = {{pt:2, mt:0.2}}
+                    variant="h4">Search Courses</Typography>
+                <Typography
+                    align = "center"
+                    variant="h6">Via dgcoursereview.com</Typography>
+                <Paper display='flex' justifyContent='center'>
+                    <FormControl fullWidth sx={{ m:2 }} variant="standard">
+                        <InputLabel>Enter Part of Course Name</InputLabel>
+                        <Input 
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            value={searchTerm}
+                        />
+                    </FormControl>   
+                    <Box display='flex' justifyContent='flex-end'>
+                        <Button sx={{m:2}}
+                            variant="contained"
+                            align = 'right'
+                            onClick={submitSearch}>
+                            Search
+                        </Button> 
+                    </Box>
+                </Paper>
+            </Box>
             <BottomNavBar />
         </Box>
 

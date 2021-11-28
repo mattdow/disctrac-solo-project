@@ -26,27 +26,32 @@ function CourseItem({course}) {
     console.log('Course object is: ', course);
     // JSX code to render to the DOM
     return (
-        <Card variant="outlined" sx={{my:2}}>
-                <Typography
-                    variant="h6">
-                    {course.course_name}
+        <Card variant="outlined" sx={{my:2, mx:0.4, boxShadow: 1, borderRadius: 1}}>
+                <CardContent sx={{display: 'flex', justifyContent: 'center', pb: 0,  }}>
+                    <Typography 
+                        variant = "body"
+                        fontWeight = "bold">
+                        {course.course_name}
+                    </Typography>
+                </CardContent>
+            <CardContent sx={{display: 'flex', justifyContent: 'space-between', pt:0}}>   
+                <Typography 
+                    variant = "body" sx={{ml:1}}>
+                    {course.total_holes} Holes
                 </Typography>
-                <Typography
-                    variant = "body2">
-                    {course.total_holes} Holes    
-                </Typography>
-                <Typography
-                    variant="body2">
+                <Typography 
+                    variant = "body" sx={{mr:1}}>
                     Par {course.total_par}
                 </Typography>
+            </CardContent>
             <CardActions sx={{display: "flex",
             justifyContent: "space-evenly"}}>
-                <Button variant="outlined"
+                <Button variant="contained"
                         onClick={() => startRound()}>
                     Start Round
                 </Button>
                 {user.is_admin && 
-                <Button variant="outlined"
+                <Button variant="contained"
                         color="secondary">
                     Edit Course
                 </Button>}

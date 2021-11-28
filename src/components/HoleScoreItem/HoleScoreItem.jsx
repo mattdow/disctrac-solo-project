@@ -19,7 +19,7 @@ function HoleScoreItem({ score, course, round }) {
     }
 
     return (
-        <Card variant="outlined" sx={{my:2}}>
+        <Card variant="outlined" sx={{my:2, mx:0.4, boxShadow: 1, borderRadius: 1}}>
             <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Typography 
                     variant = "h6">
@@ -35,10 +35,10 @@ function HoleScoreItem({ score, course, round }) {
                 </Typography>
             </CardContent>
             <CardActions sx={{display: 'flex', justifyContent: 'center'}}>
-                <Button size="large" 
-                        variant="outlined"
+                <Button  
+                        variant="contained"
                         onClick={editScore}
-                        >EDIT</Button>
+                        >EDIT SCORE</Button>
             </CardActions>
         </Card>
     )

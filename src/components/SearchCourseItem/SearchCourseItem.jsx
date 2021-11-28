@@ -22,24 +22,27 @@ function SearchCourseItem({ result }) {
 
     // return JSX rendering material
     return (
-        <Card variant="outlined" sx={{my:2}}>
-            <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
-                <Typography
-                    variant = "body2">
+        <Card variant="outlined" sx={{my:2, mx:0.4, boxShadow: 1, borderRadius: 1}}>
+            <CardContent sx={{display: 'flex', justifyContent: 'center', pb: 0,  }}>
+                <Typography 
+                    variant = "body"
+                    fontWeight = "bold">
                     {result.name}
                 </Typography>
+            </CardContent>
+            <CardContent sx={{display: 'flex', justifyContent: 'space-between', pt:0.5}}>   
                 <Typography 
-                    variant = "body2">
+                    variant = "body" sx={{ml:1}}>
                     {result.city}
                 </Typography>
-                <Typography
-                    variant = "body2">
+                <Typography 
+                    variant = "body" sx={{mr:1}}>
                     {result.holes} Holes
                 </Typography>
-            </CardContent>
-            <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
-                <Button size="large" 
-                    variant="outlined"
+            </CardContent>  
+            <CardActions sx={{display: 'flex', justifyContent: 'center'}}>
+                <Button  
+                    variant="contained"
                     onClick={() => addCourse()}>ADD COURSE</Button>
             </CardActions>
         </Card>

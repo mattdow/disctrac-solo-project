@@ -42,13 +42,15 @@ function ReviewRound() {
         dispatch({ type: 'FETCH_HOLE_SCORES', payload: round });
     }, [])
     return (
-        <Box sx={{ pb: 7 }}>
+        <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
             <Typography
-                sx = {{m:2}}
+                align='center'
+                sx = {{pt:2, mt:0.2}}
                 variant = 'h4'>Review Your Round</Typography>
             <Typography
+                align='center'
                 sx = {{m:2}}
-                variant = 'h4'>Total Score: {convertedScore} </Typography>
+                variant = 'h5'>Total Score: {convertedScore} </Typography>
             <Grid container className="hole-score-list">
                 {holeScores.map(score => {
                     return (

@@ -22,17 +22,22 @@ function CoursesView(){
     }, [dispatch]);
     // JSX render code for the component
     return (
-        <Box sx={{ pb: 7 }}>
-            <Typography
-                sx = {{m:2}}
-                variant = 'h2'>Courses</Typography>
+        <Box sx={{ pb: 7, backgroundColor: '#F5FBEF'}}>
+            <Box display='flex' justifyContent='center'>
+                <Typography
+                    align='center'
+                    sx = {{pt:2, mt:0.2}}
+                    variant = 'h4'>Courses</Typography>
 
-            <Button 
-                onClick = {() => history.push('/searchcourses')}
-                variant = "outlined"
-                >
-                    Search for a Course
-            </Button>
+                <Button
+                    sx= {{mt:2.5, ml:3}}
+                    onClick = {() => history.push('/searchcourses')}
+                    variant = "contained"
+                    color = "success"
+                    >
+                        Course Search
+                </Button>
+        </Box>  
                 
             <Grid container className="courses-list">
                 {courses.map(course => {
