@@ -35,13 +35,23 @@ function* fetchUserRoundScores(action) {
         yield put({ type: 'FETCH_USER_ROUND_SCORES_ERROR'});
     }    
 }
+// generator function to fetch the courses the user has played
+function* fetchUserCourses(action) {
+    console.log('In fetchUserCourses');
+    try {
+        const response = yield axios.get(`/api/userstats/courses`);
+        yield put ({ type: 'SET_USER_COURSES', payload: response.data});
+    } catch (err) {
+        yield put({ type: 'FETCH_USER_COURSES_ERROR'});
+    }
+}
 
 function* userStatsSaga() {
 
     yield takeLatest('FETCH_USER_SUMMARY', fetchUserSummary);
     yield takeLatest('FETCH_USER_HOLE_SCORES', fetchUserHoleScores);
     yield takeLatest('FETCH_USER_ROUND_SCORES', fetchUserRoundScores);
-    yield 
+    yield takeLatest('FETCH_USER_COURSES', fetchUserCourses);
 }
 
 export default userStatsSaga;

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ScatterChart from '../ScatterChart/ScatterChart';
 import BarChart from '../BarChart/BarChart';
 import BottomNavBar from '../BottomNavBar/BottomNavBar';
@@ -16,13 +16,20 @@ function ProfilePage() {
     const history = useHistory();
     // grab user summary stats from store
     const userStats = useSelector(store => store.userStats);
+    // grab the user's courses from store
+    const userCourses = useSelector(store => store.userCourses);
+    // define a state variable for the user's course selection
+    let [courseSelect, setCourseSelect] = useState('All Courses');
+    // define a function to handle change of a user course selection
+    function handleCourseSelection(event) {
+        event.preventDefault();
+    }
 
     console.log('User summary stats are: ', userStats);
 
-
-
     useEffect(() => {
         dispatch({ type: 'FETCH_USER_SUMMARY' });
+        dispatch({ type: 'FETCH_USER_COURSES' });
     }, [dispatch])
     // JSX code to render to the DOM
     return (
@@ -59,7 +66,28 @@ function ProfilePage() {
                         LOG OUT
                 </Button>
             </Box>
-            
+            <FormControl>
+                <InputLabel>Course Selection</InputLabel>
+                <Select
+                    value={courseSelect}
+                    label="Course Selection"
+                    onChange={(e) => setCourseSelect(e.target.value)}
+                >
+                    <MenuItem value={'All Courses'}>
+                        All Courses</MenuItem>
+                    {userCourses.map((course) => {
+                        return (
+                            <MenuItem key={course.id}
+                            value={course.course_name}>
+                                {course.course_name}
+                            </MenuItem>
+                        )
+                    })}
+
+
+                </Select>
+
+            </FormControl>
             <BarChart />
             <ScatterChart />
             <BottomNavBar />
