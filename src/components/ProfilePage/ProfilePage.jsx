@@ -19,7 +19,7 @@ function ProfilePage() {
     // grab the user's courses from store
     const userCourses = useSelector(store => store.userCourses);
     // define a state variable for the user's course selection
-    let [courseSelect, setCourseSelect] = useState('All Courses');
+    let [courseSelect, setCourseSelect] = useState(0);
     // define a function to handle change of a user course selection
     function handleCourseSelection(event) {
         event.preventDefault();
@@ -66,29 +66,29 @@ function ProfilePage() {
                         LOG OUT
                 </Button>
             </Box>
-            <FormControl>
-                <InputLabel>Course Selection</InputLabel>
-                <Select
-                    value={courseSelect}
-                    label="Course Selection"
-                    onChange={(e) => setCourseSelect(e.target.value)}
-                >
-                    <MenuItem value={'All Courses'}>
-                        All Courses</MenuItem>
-                    {userCourses.map((course) => {
-                        return (
-                            <MenuItem key={course.id}
-                            value={course.course_name}>
-                                {course.course_name}
-                            </MenuItem>
-                        )
-                    })}
-
-
-                </Select>
-
-            </FormControl>
-            <BarChart />
+            <Box sx={{display:'flex', justifyContent:'center'}}>
+                <FormControl sx={{my:2}}>
+                    <InputLabel>Course Selection</InputLabel>
+                    <Select
+                        value={courseSelect}
+                        label="Course Selection"
+                        onChange={(e) => setCourseSelect(e.target.value)}
+                    >
+                        <MenuItem value={0}>
+                            View All Courses</MenuItem>
+                        {userCourses.map((course) => {
+                            return (
+                                <MenuItem key={course.id}
+                                value={course.id}>
+                                    {course.course_name}
+                                </MenuItem>
+                            )
+                        })}
+                    </Select>
+                </FormControl>
+            </Box>
+            
+            <BarChart courseID={courseSelect}/>
             <ScatterChart />
             <BottomNavBar />
 

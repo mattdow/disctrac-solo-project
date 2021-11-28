@@ -22,7 +22,7 @@ router.get('/rounds', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 })
-
+// define a router to obtain user's holescores for all courses
 router.get('/holescores/', rejectUnauthenticated, (req, res) => {
     console.log('In GET route for user hole scores', req.user.id);
     // define DB query text to extract number of holes with various scores to par
@@ -31,10 +31,31 @@ router.get('/holescores/', rejectUnauthenticated, (req, res) => {
         COUNT(hole_scores.id)
         FROM hole_scores JOIN holes ON holes.id = hole_scores.hole_id
         JOIN rounds ON rounds.id = hole_scores.round_id
-        WHERE rounds.user_id = $1
+        WHERE rounds.user_id = $1 
         GROUP BY scores_to_par
         ORDER BY scores_to_par ASC`;
     pool.query(queryText, [req.user.id])
+        .then(response => {
+            console.log('User holescores router response:', response.rows);
+            res.send(response.rows);
+        }).catch(err => {
+            console.log('Error on user holescores GET', err);
+            res.sendStatus(500);
+        })
+})
+// define a router to obtain users' holescores for a particular course
+router.get('/holescores/:id', rejectUnauthenticated, (req, res) => {
+    console.log('In GET route for user hole scores', req.user.id);
+    // define DB query text to extract number of holes with various scores to par
+    const queryText = `
+        SELECT (hole_scores.score - holes.par_score) AS scores_to_par,
+        COUNT(hole_scores.id)
+        FROM hole_scores JOIN holes ON holes.id = hole_scores.hole_id
+        JOIN rounds ON rounds.id = hole_scores.round_id
+        WHERE rounds.user_id = $1 AND rounds.course_id = $2
+        GROUP BY scores_to_par
+        ORDER BY scores_to_par ASC`;
+    pool.query(queryText, [req.user.id, req.params.id])
         .then(response => {
             console.log('User holescores router response:', response.rows);
             res.send(response.rows);

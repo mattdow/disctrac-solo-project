@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2';
 import { Box, Paper } from '@mui/material';
 
 
-function BarChart() {
+function BarChart(courseID) {
     // get the user's info from the store
     const user = useSelector((store) => store.user);
     //set dispatch hook as a variable for use
