@@ -12,7 +12,18 @@ function BarChart(courseID) {
     // grab user hole score data for the chart from Redux store
     const userHoleScores = useSelector(store => store.userHoleScores);
     console.log('userHoleScores are:', userHoleScores);
+    // grab the user's courses from store
+    const userCourses = useSelector(store => store.userCourses);
+    console.log('User courses are:', userCourses, courseID);
     // define a variable mapping the scores_to_par as labels
+    let courseLabel = 'All Courses';
+    for(let course of userCourses) {
+        console.log('In for loop for course ID', course.id);
+        if(course.id === courseID.courseID) {
+         courseLabel = course.course_name;   
+        } // end of if        
+    }// end of for
+    console.log('Course label is: ', courseLabel);
     const scoreLabels = userHoleScores.map((score) => {
         if (score.scores_to_par <= -2) {
             return 'Eagle';
@@ -33,7 +44,7 @@ function BarChart(courseID) {
     const chartData = {
         labels: scoreLabels,
         datasets: [{
-            label: 'All Courses',
+            label: courseLabel,
             data: scoreData,
             backgroundColor: ['#A6D1F2', '#78E425', '#E7FF5C', '#FFB347', '#FF4747', '#64453F']
         }]
