@@ -15,11 +15,19 @@ function* fetchUserSummary(action) {
 }
 // generator function to fetch the count of the user's hole scores grouped by score in relation to par
 function* fetchUserHoleScores(action) {
-    console.log('In fetchUserHoleScores');
+    console.log('In fetchUserHoleScores with courseID', action.payload.courseID);
     try { 
-        const response = yield axios.get(`/api/userstats/holescores`);
-        yield console.log('User holescore GET response:', response);
-        yield put({ type: 'SET_USER_HOLE_SCORES', payload: response.data }); 
+        // if all courses is selected, make the router call for all courses
+        if(action.payload.courseID === 0) {
+            const response = yield axios.get(`/api/userstats/holescores`);
+            yield console.log('User holescore GET for all courses:', response.data);
+            yield put({ type: 'SET_USER_HOLE_SCORES', payload: response.data });
+        } // if there is a course value, make the specific router call
+        else {
+            const response = yield axios.get(`api/userstats/holescores/${action.payload.courseID}`);
+            yield console.log('User holescore GET for one course', action.payload, response);
+            yield put({ type: 'SET_USER_HOLE_SCORES', payload: response.data });             
+        }       
     } catch (err) {
         yield put({ type: 'FETCH_USER_HOLESCORE_ERROR'});
         console.log('Error in fetchUserHoleScores');        

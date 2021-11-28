@@ -75,8 +75,8 @@ function BarChart(courseID) {
     }
     // call useEffect to fetch the user hole scores upon load
     useEffect(() => {
-        dispatch({ type: 'FETCH_USER_HOLE_SCORES'});
-    }, [dispatch])
+        dispatch({ type: 'FETCH_USER_HOLE_SCORES', payload: courseID});
+    }, [dispatch, courseID])
 
     // JSX code to render the chart to the DOM
     return (

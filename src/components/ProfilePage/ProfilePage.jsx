@@ -26,11 +26,12 @@ function ProfilePage() {
     }
 
     console.log('User summary stats are: ', userStats);
+    console.log('Course selection is: ', courseSelect);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_USER_SUMMARY' });
         dispatch({ type: 'FETCH_USER_COURSES' });
-    }, [dispatch])
+    }, [dispatch, courseSelect])
     // JSX code to render to the DOM
     return (
         <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
