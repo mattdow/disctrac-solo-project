@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Card, TextField, Typography, Box, Input, IconButton } from '@mui/material';
+import { Button, Card, Paper, TextField, Typography, Box, Input, IconButton, InputLabel, FormControl } from '@mui/material';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -100,24 +100,32 @@ function HoleScoreView() {
     console.log('Active hole number is: ', activeHole.hole_number);
 
     return (
-        <section className="active-hole-view">
-            <Typography variant="h4" align="center" sx={{mb:2}}>
+        <Box sx={{ pb: 7, backgroundColor: '#F5FBEF'}}>
+            <Typography variant="h4" align="center" 
+                sx={{pt:2, mt:0.2, mb:1}}>
                 Hole {activeHole.hole_number} of {currentCourse.length}
             </Typography>
-            <Typography variant="h5" align="center" sx={{mb:2}}>
+            <Typography variant="h6" align="center" 
+                fontStyle="italic" sx={{mb:2}}>
                Par {activeHole.par_score} - {activeHole.hole_length} feet 
             </Typography>
-            {holeNotes.map((note, i) => {
-                return (
-                    <Typography key={i} variant="body1">
-                        {note.note_content}
-                    </Typography>
-                )
-                })}
-            <Box className="score-bar" sx={{display: 'flex', justifyContent:'center', my:2}}>
+            <Paper sx={{mx:1}}>
+                <Typography sx={{pt:1, fontWeight:'bold'}}
+                    align="center"
+                    >Previous Hole Notes</Typography>
+                <Box sx={{pb:3}}>
+                {holeNotes.map((note, i) => {
+                    return (
+                        <Typography sx={{ml:2, mb:0.5}}key={i} variant="body1">
+                            {note.note_content}
+                        </Typography>
+                    )
+                    })}
+                </Box>
+            </Paper>
+            <Box className="score-bar" sx={{display: 'flex', justifyContent:'center', my:3}}>
                 <IconButton onClick={decreaseScore}
                             color="success"
-                            size="large"
                             aria-label="Decrease Score"
                 >
                     <RemoveCircleOutlineIcon fontSize="large"/>
@@ -128,24 +136,30 @@ function HoleScoreView() {
                 </Typography>
                 <IconButton onClick={increaseScore}
                             color="error"
-                            size="large"
                             aria-label="Increase Score"
                 >
                     <AddCircleOutlineIcon fontSize="large"/>
                 </IconButton>
             </Box>
-            <TextField 
-                id="outlined-helper-text"
-                sx={{mb:2}} 
-                label="Hole Notes"
-                fullWidth
-                value={newNote}
-                onChange={(e) => setNewNote(e.target.value)}
-                        />
-            {(activeHole.hole_number < currentCourse.length) && <Button onClick={submitScore}>NEXT</Button>}
-            <Button onClick={reviewRound}
-            >REVIEW ROUND</Button>
-        </section>
+            <Paper display='flex' justifyContent='center'>
+                <FormControl fullWidth sx={{ m:2 }} >
+                    {!activeHole.noteContent && <InputLabel>New Hole Notes:</InputLabel>}
+                    <Input 
+                        onChange={(e) => setNewNote(e.target.value)}
+                        value={newNote}
+                    />
+                </FormControl> 
+            </Paper>
+            <Box sx={{mt:2}} display='flex'     justifyContent='space-around'>
+                <Button onClick={reviewRound}
+                    variant="contained"
+                    color="secondary"
+                    >REVIEW ROUND</Button>
+                {(activeHole.hole_number < currentCourse.length) && <Button sx={{mx:1}} onClick={submitScore}
+                    variant="contained">NEXT HOLE</Button>} 
+                
+            </Box>            
+        </Box>
     )
 
 

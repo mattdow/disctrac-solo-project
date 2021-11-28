@@ -37,7 +37,7 @@ function CoursesView(){
                     >
                         Course Search
                 </Button>
-        </Box>  
+            </Box>  
                 
             <Grid container className="courses-list">
                 {courses.map(course => {

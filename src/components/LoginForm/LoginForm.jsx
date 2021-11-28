@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import { Button, Card, Paper, TextField, Typography, Box, Input, IconButton, InputLabel, FormControl } from '@mui/material';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,26 +26,26 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+    <Box sx={{ pb: 7, backgroundColor: '#F5FBEF'}}>
+      {/* <form className="formPanel" onSubmit={login}> */}
+      <Typography variant="h4" align="left"
+        sx={{pt:2, mt:0.2, mb:1, mx:1}}>Login
+      </Typography>
       {errors.loginMessage && (
-        <h3 className="alert" role="alert">
+        <Typography variant="h5" className="alert" role="alert">
           {errors.loginMessage}
-        </h3>
+        </Typography>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+      <Box>
+        <TextField 
+          sx={{ml:2}}
+          variant="standard"
+          label="Username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}          
           />
-        </label>
-      </div>
-      <div>
+      </Box>
+      {/* <div>
         <label htmlFor="password">
           Password:
           <input
@@ -55,11 +56,30 @@ function LoginForm() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+      </div> */}
+      <Box>
+        <TextField 
+          sx={{ml:2}}
+          variant="standard"
+          type="password"
+          label="Password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}          
+          />
+      </Box>
+      <Box>
+        <Button sx={{m:2}}
+            variant="contained"
+            color="success"
+            align = 'right'
+            onClick={login}>
+            Login
+        </Button> 
+      </Box>
+    {/* </form> */}
+
+    </Box>
+    
   );
 }
 
