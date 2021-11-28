@@ -65,4 +65,23 @@ router.get('/roundscores/', rejectUnauthenticated, (req, res) => {
         })    
 })
 
+// new router for all of the user's courses
+router.get('/courses/', rejectUnauthenticated, (req, res) => {
+    console.log('In GET route for user courses', req.user.id);
+    //define DB query text
+    const queryText = `
+        SELECT courses.id, courses.course_name FROM rounds
+        JOIN courses ON rounds.course_id = courses.id
+        WHERE rounds.user_id = $1
+        GROUP BY courses.id;`;
+    pool.query(queryText, [req.user.id])
+        .then(response => {
+            console.log('User courses response:', response.rows);
+            res.send(response.rows);            
+        }).catch(err => {
+            console.log('Error on user courses GET', err);
+            res.sendStatus(500);            
+        })    
+})
+
 module.exports = router;

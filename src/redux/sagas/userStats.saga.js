@@ -41,6 +41,7 @@ function* userStatsSaga() {
     yield takeLatest('FETCH_USER_SUMMARY', fetchUserSummary);
     yield takeLatest('FETCH_USER_HOLE_SCORES', fetchUserHoleScores);
     yield takeLatest('FETCH_USER_ROUND_SCORES', fetchUserRoundScores);
+    yield 
 }
 
 export default userStatsSaga;
