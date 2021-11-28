@@ -14,11 +14,9 @@ function BarChart(courseID) {
     console.log('userHoleScores are:', userHoleScores);
     // grab the user's courses from store
     const userCourses = useSelector(store => store.userCourses);
-    console.log('User courses are:', userCourses, courseID);
     // define a variable mapping the scores_to_par as labels
     let courseLabel = 'All Courses';
     for(let course of userCourses) {
-        console.log('In for loop for course ID', course.id);
         if(course.id === courseID.courseID) {
          courseLabel = course.course_name;   
         } // end of if        

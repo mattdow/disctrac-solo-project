@@ -35,10 +35,18 @@ function* fetchUserHoleScores(action) {
 }
 //generator function to fetch the total round scores for the user
 function* fetchUserRoundScores(action) {
-    console.log('In fetchUserRoundScores');
+    console.log('In fetchUserRoundScores with courseID', action.payload.courseID);
     try {
-        const response = yield axios.get(`/api/userstats/roundscores`);
-        yield put ({ type: 'SET_USER_ROUND_SCORES', payload: response.data });
+        // if all courses is selected, route call all courses
+        if(action.payload.courseID === 0) {
+            const response = yield axios.get(`/api/userstats/roundscores`);
+            yield put ({ type: 'SET_USER_ROUND_SCORES', payload: response.data });
+        }
+        else {
+            const response = yield axios.get(`api/userstats/roundscores/${action.payload.courseID}`);
+            yield put ({ type: 'SET_USER_ROUND_SCORES', payload: response.data });
+        }
+        
     } catch (err) {
         yield put({ type: 'FETCH_USER_ROUND_SCORES_ERROR'});
     }    

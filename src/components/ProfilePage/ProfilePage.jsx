@@ -90,7 +90,7 @@ function ProfilePage() {
             </Box>
             
             <BarChart courseID={courseSelect}/>
-            <ScatterChart />
+            <ScatterChart courseID={courseSelect}/>
             <BottomNavBar />
 
         </Box>

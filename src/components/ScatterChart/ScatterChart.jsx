@@ -4,12 +4,20 @@ import { Box, Paper } from '@mui/material';
 import { Scatter, Chart }  from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
 
-function ScatterChart () {
+function ScatterChart (courseID) {
     // set dispatch hook as a variable for use
     const dispatch = useDispatch();
     // grab user round score data for the chart from Redux
     const userRoundScores = useSelector(store => store.userRoundScores);
-    
+    // grab the user's courses from store
+    const userCourses = useSelector(store => store.userCourses);
+    // define a variable mapping the scores_to_par as labels
+    let courseLabel = 'All Courses';
+    for(let course of userCourses) {
+        if(course.id === courseID.courseID) {
+         courseLabel = course.course_name;   
+        } // end of if        
+    }// end of for
     // map the userRoundScores to a different array of objects for the chart
     const scoreData = userRoundScores.map((score) => {
         return {
@@ -23,7 +31,7 @@ function ScatterChart () {
     const chartData = {
         datasets: [
             {
-                label: 'All courses',
+                label: courseLabel,
                 data: scoreData,
                 backgroundColor: 'red',
             }
@@ -77,8 +85,8 @@ function ScatterChart () {
     }
     // call useEffect to fetch the user round scores upon load
     useEffect(() => {
-        dispatch({ type: 'FETCH_USER_ROUND_SCORES'});
-    }, [dispatch]);
+        dispatch({ type: 'FETCH_USER_ROUND_SCORES', payload: courseID});
+    }, [dispatch, courseID]);
     return (
         <Paper sx={{m:1, display: 'flex'}}>
             <Scatter
