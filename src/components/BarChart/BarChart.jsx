@@ -15,7 +15,7 @@ function BarChart() {
     // define a variable mapping the scores_to_par as labels
     const scoreLabels = userHoleScores.map((score) => {
         if (score.scores_to_par <= -2) {
-            return 'Eagle or Better';
+            return 'Eagle';
         } else if (score.scores_to_par === -1) {
             return 'Birdie';
         } else if (score.scores_to_par === 0) {
@@ -23,7 +23,7 @@ function BarChart() {
         } else if (score.scores_to_par === 1) {
             return 'Bogey';
         } else if (score.scores_to_par === 2) {
-            return 'Double Bogey';
+            return 'Double B';
         } else return 'Worse';
     });
     console.log('scoreLabels are: ', scoreLabels);
@@ -39,16 +39,35 @@ function BarChart() {
         }]
     }
     const chartOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size:18
+                    }
+                }
+            }
+        },
         scales: {
             x: {
                 grid: {
                     display:false
-                }
+                },
+                ticks: {
+                    font: {
+                        size: 18
+                    }
+                },
             },
             y: {
                 grid: {
                     display:false
-                }   
+                },
+                ticks: {
+                    font: {
+                        size: 18
+                    }
+                },   
             }
         },
         maintainAspectRatio: false,

@@ -31,7 +31,7 @@ function ProfilePage() {
                 align='center'
                 sx = {{pt:2, mt:0.2}}
                 variant = 'h4'>
-                Your Profile
+                Welcome {user.username}!
             </Typography>
             {/* <Typography
                 sx = {{mx:2, my:1}}
@@ -42,12 +42,12 @@ function ProfilePage() {
                 <Box >
                     <Typography
                         sx = {{mx:2, my:1}}
-                        variant = 'body1'>
+                        variant = 'h6'>
                         Total Rounds: {userStats.total_rounds}
                     </Typography>
                     <Typography
                         sx = {{mx:2, my:1}}
-                        variant = 'body1'>
+                        variant = 'h6'>
                         Courses Played: {userStats.total_courses}
                     </Typography>
   

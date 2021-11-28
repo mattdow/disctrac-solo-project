@@ -30,6 +30,15 @@ function ScatterChart () {
         ]
     }
     const chartOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size:18
+                    }
+                }
+            }
+        },
         scales: {
             x: {
                 grid: {
@@ -38,7 +47,12 @@ function ScatterChart () {
                 type: 'time',
                 time: {
                     unit: 'month'
-                }
+                },
+                ticks: {
+                    font: {
+                        size: 14
+                    }
+                },
             },
             y: {
                 grid: {
@@ -46,8 +60,16 @@ function ScatterChart () {
                 },
                 title: {
                     display: true,
-                    text: 'Under/Over Par'   
-                },   
+                    text: 'Under/Over Par',
+                    font: {
+                        size: 18
+                    }   
+                },
+                ticks: {
+                    font: {
+                        size: 18
+                    }
+                },      
             }
         },
         maintainAspectRatio: false,
