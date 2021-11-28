@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Button, Box } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import RegisterForm from '../RegisterForm/RegisterForm';
 
@@ -7,22 +7,24 @@ function RegisterPage() {
   const history = useHistory();
 
   return (
-    <div>
+    <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
       <RegisterForm />
 
       <center>
-        <button
+        <Button
           type="button"
+          size="large"
           className="btn btn_asLink"
           onClick={() => {
             history.push('/login');
           }}
         >
-          Login
-        </button>
+          LOGIN
+        </Button>
       </center>
-    </div>
+    </Box>
   );
 }
+
 
 export default RegisterPage;

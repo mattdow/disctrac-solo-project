@@ -27,7 +27,6 @@ function LoginForm() {
 
   return (
     <Box sx={{ pb: 7, backgroundColor: '#F5FBEF'}}>
-      {/* <form className="formPanel" onSubmit={login}> */}
       <Typography variant="h4" align="left"
         sx={{pt:2, mt:0.2, mb:1, mx:1}}>Login
       </Typography>
@@ -45,18 +44,6 @@ function LoginForm() {
           onChange={(event) => setUsername(event.target.value)}          
           />
       </Box>
-      {/* <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div> */}
       <Box>
         <TextField 
           sx={{ml:2}}
@@ -76,10 +63,7 @@ function LoginForm() {
             Login
         </Button> 
       </Box>
-    {/* </form> */}
-
-    </Box>
-    
+    </Box>    
   );
 }
 
