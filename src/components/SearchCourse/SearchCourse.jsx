@@ -26,7 +26,7 @@ function SearchCourse() {
                 <Typography
                     align = "center"
                     variant="h6">Via dgcoursereview.com</Typography>
-                <Paper display='flex' justifyContent='center'>
+                <Paper display='flex' >
                     <FormControl fullWidth sx={{ m:2 }} variant="standard">
                         <InputLabel>Enter Part of Course Name</InputLabel>
                         <Input 

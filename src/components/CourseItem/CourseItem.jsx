@@ -22,8 +22,8 @@ function CourseItem({course}) {
         }})
         history.push(`activeround/${course.id}/1`);
     } // end of startRound
-    console.log('User object is: ', user);
-    console.log('Course object is: ', course);
+    // console.log('User object is: ', user);
+    // console.log('Course object is: ', course);
     // JSX code to render to the DOM
     return (
         <Card variant="outlined" sx={{my:2, mx:0.4, boxShadow: 1, borderRadius: 1}}>
