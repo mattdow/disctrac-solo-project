@@ -34,8 +34,9 @@ function ProfilePage() {
     console.log('Course selection is: ', courseSelect);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_USER_SUMMARY' });
         dispatch({ type: 'FETCH_USER_COURSES' });
+        dispatch({ type: 'FETCH_USER_SUMMARY' });
+        
     }, [dispatch, courseSelect])
     // JSX code to render to the DOM
     return (
@@ -82,7 +83,7 @@ function ProfilePage() {
                     >
                         <MenuItem value={0}>
                             View All Courses</MenuItem>
-                        {userCourses.map((course) => {
+                        {userCourses?.map((course) => {
                             return (
                                 <MenuItem key={course.id}
                                 value={course.id}>

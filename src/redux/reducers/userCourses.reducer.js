@@ -3,7 +3,7 @@ const userCoursesReducer = (state = [], action) => {
         case 'SET_USER_COURSES':
             return action.payload;
         case 'LOGOUT':
-            return {};
+            return [];
         default:
             return state;
     }
