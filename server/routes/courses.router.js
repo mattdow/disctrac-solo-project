@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
             SUM(holes.par_score) AS total_par 
             FROM courses JOIN holes ON courses.id = holes.course_id 
             GROUP BY courses.id, courses.course_name
-            ORDER BY courses.id ASC;`;
+            ORDER BY courses.id DESC;`;
     pool.query(query).then( result => {
         res.send(result.rows);
     }).catch(err => {

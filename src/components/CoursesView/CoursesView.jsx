@@ -23,7 +23,7 @@ function CoursesView(){
     // JSX render code for the component
     return (
         <Box sx={{ pb: 7, backgroundColor: '#F5FBEF'}}>
-            <Box display='flex' justifyContent='center'>
+            <Box sx={{pt:2, mt:0.2}} display='flex' justifyContent='center'>
                 <Typography
                     align='center'
                     sx = {{pt:2, mt:0.2}}

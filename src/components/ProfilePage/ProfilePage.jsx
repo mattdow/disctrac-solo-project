@@ -24,6 +24,11 @@ function ProfilePage() {
     function handleCourseSelection(event) {
         event.preventDefault();
     }
+    // create a function to run on logout
+    function onLogout() {
+        dispatch({ type: 'LOGOUT' });
+        history.push('/home');
+    }
 
     console.log('User summary stats are: ', userStats);
     console.log('Course selection is: ', courseSelect);
@@ -63,7 +68,7 @@ function ProfilePage() {
                 <Button
                     variant="contained"
                     sx={{mr:2, my:2}}
-                    onClick={() => dispatch({ type: 'LOGOUT' })}>
+                    onClick={onLogout}>
                         LOG OUT
                 </Button>
             </Box>
