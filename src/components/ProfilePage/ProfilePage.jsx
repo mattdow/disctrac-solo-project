@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ScatterChart from '../ScatterChart/ScatterChart';
 import BarChart from '../BarChart/BarChart';
 import BottomNavBar from '../BottomNavBar/BottomNavBar';
@@ -16,14 +16,27 @@ function ProfilePage() {
     const history = useHistory();
     // grab user summary stats from store
     const userStats = useSelector(store => store.userStats);
+    // grab the user's courses from store
+    const userCourses = useSelector(store => store.userCourses);
+    // define a state variable for the user's course selection
+    let [courseSelect, setCourseSelect] = useState(0);
+    // define a function to handle change of a user course selection
+    function handleCourseSelection(event) {
+        event.preventDefault();
+    }
+    // create a function to run on logout
+    function onLogout() {
+        dispatch({ type: 'LOGOUT' });
+        history.push('/home');
+    }
 
     console.log('User summary stats are: ', userStats);
-
-
+    console.log('Course selection is: ', courseSelect);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_USER_SUMMARY' });
-    }, [dispatch])
+        dispatch({ type: 'FETCH_USER_COURSES' });
+    }, [dispatch, courseSelect])
     // JSX code to render to the DOM
     return (
         <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
@@ -55,13 +68,34 @@ function ProfilePage() {
                 <Button
                     variant="contained"
                     sx={{mr:2, my:2}}
-                    onClick={() => dispatch({ type: 'LOGOUT' })}>
+                    onClick={onLogout}>
                         LOG OUT
                 </Button>
             </Box>
+            <Box sx={{display:'flex', justifyContent:'center'}}>
+                <FormControl sx={{my:2}}>
+                    <InputLabel>Course Selection</InputLabel>
+                    <Select
+                        value={courseSelect}
+                        label="Course Selection"
+                        onChange={(e) => setCourseSelect(e.target.value)}
+                    >
+                        <MenuItem value={0}>
+                            View All Courses</MenuItem>
+                        {userCourses.map((course) => {
+                            return (
+                                <MenuItem key={course.id}
+                                value={course.id}>
+                                    {course.course_name}
+                                </MenuItem>
+                            )
+                        })}
+                    </Select>
+                </FormControl>
+            </Box>
             
-            <BarChart />
-            <ScatterChart />
+            <BarChart courseID={courseSelect}/>
+            <ScatterChart courseID={courseSelect}/>
             <BottomNavBar />
 
         </Box>
