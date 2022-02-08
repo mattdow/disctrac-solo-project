@@ -9,8 +9,8 @@ function LoginPage() {
   return (
     <Box sx={{ pb: 7, backgroundColor: '#F5FBEF' }}>
       <LoginForm />
-
       <center>
+        
         <Button
           type="button"
           size="large"
